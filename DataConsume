@@ -1,17 +1,3 @@
-
---package dataConsume_pack is
-
---	  type STATE_TYPE is
---		(
---			INIT,
---			REQ_DATA,
---			WAIT_DATA,
---			DATA_VALID,
---			UPDATE_REG
---		);
-		
---end dataConsume_pack;		
-
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned."+";
@@ -105,12 +91,20 @@ BEGIN
   END PROCESS;  --counter_bcd
   
   shifter: PROCESS (CLK)
-    VARIABLE reg_shift : CHAR_ARRAY_TYPE(6 DOWNTO 0) := ("00000000","00000000","00000000","00000000","00000000","00000000","00000000",);
+    VARIABLE reg_shift : CHAR_ARRAY_TYPE(6 DOWNTO 0) := ("00000000","00000000","00000000","00000000","00000000","00000000","00000000");
   BEGIN
     IF clk'EVENT AND clk='1' AND shifter_en='1' THEN
-      for i in 7 downto 1 loop
-        
+      FOR i in 7 downto 1 LOOP
+        reg_shift(i) := reg_shift(i-1);
+      END LOOP;
       
+      reg_shifter(0) := reg_data  
+    ELSE NULL;
+    END IF;
+    
+    array1 <= reg_shift
+    
+  END PROCESS; -- shifter
   
   
   
