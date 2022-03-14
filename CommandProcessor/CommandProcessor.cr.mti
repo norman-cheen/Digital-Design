@@ -1,0 +1,78 @@
+{O:/Assignment 2/CommandProcessor/dataConsume_unsigned.vhdp} {1 {vcom -work work -2002 -explicit -vopt {O:/Assignment 2/CommandProcessor/dataConsume_unsigned.vhdp}
+Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling package dataConsume_pack
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading package dataConsume_pack
+-- Loading package common_pack
+-- Compiling entity dataConsume
+
+} {} {}} {O:/Assignment 2/CommandProcessor/cmdProc.vhdp} {1 {vcom -work work -2002 -explicit -vopt {O:/Assignment 2/CommandProcessor/cmdProc.vhdp}
+Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling package cmdProc_pack
+
+} {} {}} {O:/Assignment 2/CommandProcessor/dataGen.vhd} {1 {vcom -work work -2002 -explicit -vopt {O:/Assignment 2/CommandProcessor/dataGen.vhd}
+Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package common_pack
+-- Compiling entity dataGen
+-- Compiling architecture behav of dataGen
+
+} {} {}} {O:/Assignment 2/CommandProcessor/comparator1.vhd} {1 {vcom -work work -2002 -explicit -vopt {O:/Assignment 2/CommandProcessor/comparator1.vhd}
+Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading package common_pack
+-- Compiling entity comparator
+-- Compiling architecture unsigned_int of comparator
+
+} {} {}} {O:/Assignment 2/CommandProcessor/tb_CmdProcessor.vhd} {1 {vcom -work work -2002 -explicit -vopt {O:/Assignment 2/CommandProcessor/tb_CmdProcessor.vhd}
+Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package common_pack
+-- Compiling entity tb_cmdProc_interim
+-- Compiling architecture testbench of tb_cmdProc_interim
+
+} {} {}} {O:/Assignment 2/CommandProcessor/UART_RX_CTRL.vhd} {1 {vcom -work work -2002 -explicit -vopt {O:/Assignment 2/CommandProcessor/UART_RX_CTRL.vhd}
+Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity UART_RX_CTRL
+-- Compiling architecture RCVR of UART_RX_CTRL
+
+} {} {}} {O:/Assignment 2/CommandProcessor/common_pack.vhd} {1 {vcom -work work -2002 -explicit -vopt {O:/Assignment 2/CommandProcessor/common_pack.vhd}
+Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling package common_pack
+
+} {} {}} {O:/Assignment 2/CommandProcessor/UART_TX_CTRL.vhd} {1 {vcom -work work -2002 -explicit -vopt {O:/Assignment 2/CommandProcessor/UART_TX_CTRL.vhd}
+Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity UART_TX_CTRL
+-- Compiling architecture Behavioral of UART_TX_CTRL
+
+} {} {}}
