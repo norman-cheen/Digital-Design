@@ -29,9 +29,10 @@ ARCHITECTURE bahav of dataConsume is
   SIGNAL bcd_counter: BCD_ARRAY_TYPE(2 DOWNTO 0) := ("0000", "0000", "0000");
   SIGNAL array1: CHAR_ARRAY_TYPE(6 DOWNTO 0) := ("00000000","00000000","00000000","00000000","00000000","00000000","00000000");
   SIGNAL array2: CHAR_ARRAY_TYPE(6 DOWNTO 0) := ("00000000","00000000","00000000","00000000","00000000","00000000","00000000");
+  SIGNAL peakDetected: std_logic :='0';
+  SIGNAL dataThreshold: std_logic_vector(7 downto 0) := ("00000000");
   
-  
-  SIGNAL reg_data: std_logic_vector(7 downto 0);
+  SIGNAL reg_data: std_logic_vector(7 downto 0); -- data from datagen has to be registered
   
   
   SIGNAL bcd_counter_en: std_logic;
@@ -56,7 +57,7 @@ ARCHITECTURE bahav of dataConsume is
 BEGIN
   
   ----------BCD counter----------------------------------------------
-  bcd_counter: PROCESS (clk, reset)
+  bcdCounter: PROCESS (clk, reset)
     VARIABLE digit1, digit10, digit100 : std_logic_vector(3 DOWNTO 0);
   BEGIN
     IF clk'EVENT AND clk='1' THEN 
@@ -68,7 +69,7 @@ BEGIN
       ELSIF bcd_counter_en = '1' THEN
         IF digit1 < "1001" THEN        --if count less than 9
           digit1  := digit1 + 1;
-        ELSE 
+        ELSE C:/Users/ts20365/OneDrive - University of Bristol/Digital Design/Assignment 2 Coding/dataConsume.vhd
           digit1  := "0000";           --if count >=9, carry out
           digit10 := digit10 + 1;
         END IF;
@@ -98,14 +99,22 @@ BEGIN
         reg_shift(i) := reg_shift(i-1);
       END LOOP;
       
-      reg_shifter(0) := reg_data  
+      reg_shift(0) := reg_data;  
     ELSE NULL;
     END IF;
     
-    array1 <= reg_shift
+    array1 <= reg_shift;
     
   END PROCESS; -- shifter
   
+  pendingResult: Process (CLK)
+  BEGIN
+    IF peakDetected = '1' THEN
+      IF dataThreshold = array1(3) THEN
+        array2 <= array1;
+      END IF;
+    END IF;
+  END PROCESS;
   
   
 END; -- end architecture
