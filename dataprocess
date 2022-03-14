@@ -1,12 +1,15 @@
-
-LIBRARY ieee;
-USE ieee.std_logic_1164.ALL;
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned."+";
+use ieee.std_logic_unsigned."-";
+use ieee.std_logic_unsigned."=";
 use work.common_pack.all;
 
 entity dataConsume is
-	port ( clk:  in std_logic;
-		reset: in std_logic; 
-		start: in std_logic; 
+	port (
+	  clk:		in std_logic;
+		reset:		in std_logic; -- synchronous reset
+		start: in std_logic; -- goes high to signal data transfer
 		numWords_bcd: in BCD_ARRAY_TYPE(2 downto 0);
 		ctrlIn: in std_logic;
 		ctrlOut: out std_logic;
@@ -15,18 +18,84 @@ entity dataConsume is
 		byte: out std_logic_vector(7 downto 0);
 		seqDone: out std_logic;
 		maxIndex: out BCD_ARRAY_TYPE(2 downto 0);
-		dataResults: out CHAR_ARRAY_TYPE(0 to RESULT_BYTE_NUM-1)); 
- end dataConsume;
+		dataResults: out CHAR_ARRAY_TYPE(0 to RESULT_BYTE_NUM-1) -- index 3 holds the peak
+	);
+end dataConsume;
+
+architecture behav of dataConsume is
+  
+  --------------Comparator-----------------------------------  
+  component comparator is
+	  port (
+		   data1: in std_logic_vector(7 downto 0);
+		   data2: in std_logic_vector(7 downto 0);
+		   grtThan: out std_logic;
+		   equal: out std_logic
+	     );
+    end component;
+  
  
-architecture behav of dataConsume is 
-  TYPE state_type IS (init,first,second,third,fourth,fifth,sixth); 
+  TYPE state_type IS (init,first,second,third,fourth,fifth); 
   SIGNAL curState, nextState: state_type;
   Signal CtrlIn_Reg,CtrlIn_detected:std_logic; 
-  Signal Bcd_counter_signal: BCD_ARRAY_TYPE(2 downto 0);
-  Signal Max_index_counter_signal: BCD_ARRAY_TYPE(2 downto 0);
-  Signal Bcd_counter_en,Bcd_counter_reset: std_logic;
-    begin
-    next_state_logic: process(curState,start,Bcd_counter_signal,ctrlIn)
+  SIGNAL bcd_counter: BCD_ARRAY_TYPE(2 DOWNTO 0) := ("0000", "0000", "0000");
+  SIGNAL array1: CHAR_ARRAY_TYPE(6 DOWNTO 0) := ("00000000","00000000","00000000","00000000","00000000","00000000","00000000");
+  SIGNAL array2: CHAR_ARRAY_TYPE(6 DOWNTO 0) := ("00000000","00000000","00000000","00000000","00000000","00000000","00000000");
+  
+  signal dataThreshold : std_logic_vector(7 DOWNTO 0);
+  signal grtthan,equals: std_logic;
+  signal peakdetected: std_logic;
+  SIGNAL reg_data: std_logic_vector(7 downto 0);
+  SIGNAL max_index_sig: BCD_ARRAY_TYPE(2 DOWNTO 0);
+  
+  SIGNAL bcd_counter_en: std_logic;
+  SIGNAL bcd_counter_reset: std_logic;
+  SIGNAL shifter_en: std_logic;
+  
+  BEGIN
+    
+   ---------Comparator Port Mapping ---------------------------------
+    Comp1: comparator port map(data,dataThreshold,grtthan,equals);
+      
+      
+  ----------BCD counter----------------------------------------------
+  bcdCounter: PROCESS (clk, reset)
+    VARIABLE digit1, digit10, digit100 : std_logic_vector(3 DOWNTO 0);
+  BEGIN
+    IF clk'EVENT AND clk='1' THEN 
+      IF reset = '1' or bcd_counter_reset = '1' THEN
+        digit1   := "0000";
+        digit10  := "0000";
+        digit100 := "0000";
+        
+      ELSIF bcd_counter_en = '1' THEN
+        IF digit1 < "1001" THEN        --if count less than 9
+          digit1  := digit1 + 1;
+        ELSE 
+          digit1  := "0000";           --if count >=9, carry out
+          digit10 := digit10 + 1;
+        END IF;
+        
+        IF digit10 < "1001" THEN       --if count less than 90
+          digit10  := digit10 + 1;
+        ELSE 
+          digit10  := "0000";          --if count >=90, carry out
+          digit100 := digit100 + 1;
+        END IF;
+      
+      END IF;
+      
+      bcd_counter(0) <= digit1;
+      bcd_counter(1) <= digit10;
+      bcd_counter(2) <= digit100;
+      
+    END IF;
+      
+  END PROCESS;  --counter_bcd
+  
+  
+   ----------Next State Logic----------------------------------------------
+  next_state_logic: process(curState,start,bcd_counter,ctrlIn)
     begin
       Case curState is 
         when init =>
@@ -46,31 +115,55 @@ architecture behav of dataConsume is
              nextState <= second;   
           end if;  
         when second =>
-          -- The receive data state from the dat generator
-          byte <= data; 
-          nextState <= 4;
-	when third => 
-	    nextState <= fourth;
-	    Bcd_counter_en <= '0';
-        when fourth =>   
-              if Bcd_counter_signal = numWords_bcd then 
+          -- The receive data state from the dat generator 
+          nextState <= third;
+        	when third =>
+         		    nextState <= fourth; 
+              if bcd_counter = numWords_bcd then 
                 nextState <= fourth;
               else
                if start = '0' then
                   nextState <= second;
                 else
                   nextState <= first;
-                end if; e
+                end if; 
               end if;
+        when fourth =>
+               nextState <= fifth;
         when fifth =>
-               nextState <= sixth;
-        when sixth =>
               nextState <= init;	      
       end case;
-    
       end process;
-
-   two_phase_protocol:process(clk,curState)
+      
+--------------------SHIFTER------------------------------------------------------    
+  shifter: PROCESS (CLK)
+    VARIABLE reg_shift : CHAR_ARRAY_TYPE(6 DOWNTO 0) := ("00000000","00000000","00000000","00000000","00000000","00000000","00000000");
+  BEGIN
+    IF clk'EVENT AND clk='1' AND shifter_en='1' THEN
+      FOR i in 7 downto 1 LOOP
+        reg_shift(i) := reg_shift(i-1);
+      END LOOP;
+      
+      reg_shift(0) := reg_data;  
+    ELSE NULL;
+    END IF;
+    
+    array1 <= reg_shift;
+    
+  END PROCESS; -- shifter
+  
+  pendingResult: Process (CLK)
+  BEGIN
+    IF peakDetected = '1' THEN
+      IF dataThreshold = array1(3) THEN
+        array2 <= array1;
+      END IF;
+    END IF;
+  END PROCESS;      
+      
+      
+ ----------Next State Logic----------------------------------------------     
+ two_phase_protocol:process(clk,curState)
     begin 
     if curState = first then
      if rising_edge(clk) then
@@ -81,7 +174,8 @@ architecture behav of dataConsume is
      CtrlIn_detected <= ctrlIn; 
     end if;
     end process;
-
+    
+ ----------Next State Clock----------------------------------------------     
     next_state_clk: process(clk,reset)
      begin 
        if reset = '0' then 
@@ -89,18 +183,35 @@ architecture behav of dataConsume is
        elsif clk'event and clk ='1' then
          curState <= nextState;
        end if; 
-      end process;
+      end process;  
       
-    out_clk: process(curState)
+  ----------Output State -------------------------------------------------   
+      out_state: process(curState)
     begin
-		   dataReady <= '0';
-		   seqDone<= '0';
---		   maxIndex <= '0' ;
-		 --  dataResults <= '0' ;
-		   if curState = fifth then 
-		     maxIndex <= Max_index_counter_signal; 
-		   elsif curState = sixth then
-		     seqDone<= '1';
+       if curState = second then 
+         byte <= data; 
+         dataReady <= '1'; 
+         bcd_counter_en <='1';
+         shifter_en <= '1';
+         reg_data <= data;
+         if grtthan = '1' then 
+            dataThreshold <= data;
+            max_index_sig <= bcd_counter;
+            peakdetected <= '1';
+         else 
+           dataThreshold <=  dataThreshold;  
+           max_index_sig <= max_index_sig; 
+         end if;
+       elsif  curState = third then
+           bcd_counter_en <= '0';
+		   elsif curState = fourth then 
+		     dataResults <= array2;
+		     maxIndex <= max_index_sig;
+		   elsif curState = fifth then
+		      seqDone <= '1';
 		   end if; 
     end process;
-end behav; 
+end behav;
+  
+  
+  
