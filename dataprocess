@@ -1,8 +1,10 @@
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned."+";
 use ieee.std_logic_unsigned."-";
 use ieee.std_logic_unsigned."=";
+--use work.dataConsume_pack.all;
 use work.common_pack.all;
 
 entity dataConsume is
@@ -22,8 +24,8 @@ entity dataConsume is
 	);
 end dataConsume;
 
-architecture behav of dataConsume is
-  
+
+ARCHITECTURE bahav of dataConsume is
   --------------Comparator-----------------------------------  
   component comparator is
 	  port (
@@ -34,30 +36,33 @@ architecture behav of dataConsume is
 	     );
     end component;
   
- 
   TYPE state_type IS (init,first,second,third,fourth,fifth); 
-  SIGNAL curState, nextState: state_type;
-  Signal CtrlIn_Reg,CtrlIn_detected:std_logic; 
+  SIGNAL curState, nextState: state_type; 
+  
   SIGNAL bcd_counter: BCD_ARRAY_TYPE(2 DOWNTO 0) := ("0000", "0000", "0000");
   SIGNAL array1: CHAR_ARRAY_TYPE(6 DOWNTO 0) := ("00000000","00000000","00000000","00000000","00000000","00000000","00000000");
   SIGNAL array2: CHAR_ARRAY_TYPE(6 DOWNTO 0) := ("00000000","00000000","00000000","00000000","00000000","00000000","00000000");
-  
-  signal dataThreshold : std_logic_vector(7 DOWNTO 0);
-  signal grtthan,equals: std_logic;
-  signal peakdetected: std_logic;
-  SIGNAL reg_data: std_logic_vector(7 downto 0);
+  SIGNAL peakDetected: std_logic :='0';
+  SIGNAL dataThreshold: std_logic_vector(7 downto 0) := ("00000000");
+  SIGNAL CtrlIn_Reg,CtrlIn_detected: std_logic;
+  SIGNAL grtthan,equals: std_logic; 
   SIGNAL max_index_sig: BCD_ARRAY_TYPE(2 DOWNTO 0);
+  
+  SIGNAL reg_data: std_logic_vector(7 downto 0); -- data from datagen has to be registered
+  SIGNAL ctrl_out_sig: std_logic;
+  
   
   SIGNAL bcd_counter_en: std_logic;
   SIGNAL bcd_counter_reset: std_logic;
   SIGNAL shifter_en: std_logic;
   
-  BEGIN
+BEGIN
+   ctrlOut <= ctrl_out_sig;
+
+  ---------Comparator Port Mapping ---------------------------------
+  Comp1: comparator port map(data,dataThreshold,grtthan,equals);
     
-   ---------Comparator Port Mapping ---------------------------------
-    Comp1: comparator port map(data,dataThreshold,grtthan,equals);
-      
-      
+  
   ----------BCD counter----------------------------------------------
   bcdCounter: PROCESS (clk, reset)
     VARIABLE digit1, digit10, digit100 : std_logic_vector(3 DOWNTO 0);
@@ -93,49 +98,7 @@ architecture behav of dataConsume is
       
   END PROCESS;  --counter_bcd
   
-  
-   ----------Next State Logic----------------------------------------------
-  next_state_logic: process(curState,start,bcd_counter,ctrlIn)
-    begin
-      Case curState is 
-        when init =>
-          -- This is the initial state where the Comand Processor has its first contact with  the Data Processor
-          -- The start signal lets the dataprocessor when to strat the transition.
-            if start = '1' then
-              nextState <= first;
-            else 
-              nextState <= init;
-            end if;   
-        when first =>
-          -- This state checks if there is a transition and the setting of a transition in the value of the ctrl signal. 
-         ctrlOut <= not ctrlIn;
-          if CtrlIn_detected = '0' then 
-             nextState <= first;
-          else
-             nextState <= second;   
-          end if;  
-        when second =>
-          -- The receive data state from the dat generator 
-          nextState <= third;
-        	when third =>
-         		    nextState <= fourth; 
-              if bcd_counter = numWords_bcd then 
-                nextState <= fourth;
-              else
-               if start = '0' then
-                  nextState <= second;
-                else
-                  nextState <= first;
-                end if; 
-              end if;
-        when fourth =>
-               nextState <= fifth;
-        when fifth =>
-              nextState <= init;	      
-      end case;
-      end process;
-      
---------------------SHIFTER------------------------------------------------------    
+  ---------Shifter--------------------------------------------------
   shifter: PROCESS (CLK)
     VARIABLE reg_shift : CHAR_ARRAY_TYPE(6 DOWNTO 0) := ("00000000","00000000","00000000","00000000","00000000","00000000","00000000");
   BEGIN
@@ -152,40 +115,93 @@ architecture behav of dataConsume is
     
   END PROCESS; -- shifter
   
+  ----------pendingResult-----------------------------------------
   pendingResult: Process (CLK)
   BEGIN
-    IF peakDetected = '1' THEN
+    IF reset = '1' THEN 
+      array2 <= ("00000000","00000000","00000000","00000000","00000000","00000000","00000000");
+    ELSIF peakDetected = '1' THEN
       IF dataThreshold = array1(3) THEN
         array2 <= array1;
       END IF;
     END IF;
-  END PROCESS;      
-      
-      
- ----------Next State Logic----------------------------------------------     
+  END PROCESS; --pendingResult
+  
+  
+  
+  
+    ----------Two Phase Protocol----------------------------------------------     
  two_phase_protocol:process(clk,curState)
     begin 
     if curState = first then
-     if rising_edge(clk) then
-      CtrlIn_Reg <= ctrlIn;
+       ctrl_out_sig <= not ctrl_out_sig;
+    if rising_edge(clk) then
+       CtrlIn_Reg <= ctrlIn;
      end if;
      CtrlIn_detected <= CtrlIn_Reg xor ctrlIn;
     else
      CtrlIn_detected <= ctrlIn; 
     end if;
     end process;
-    
- ----------Next State Clock----------------------------------------------     
+  
+  
+  ----------Next State Clock----------------------------------------------     
     next_state_clk: process(clk,reset)
      begin 
-       if reset = '0' then 
+       if reset = '1' then 
          curState <= init;
        elsif clk'event and clk ='1' then
          curState <= nextState;
        end if; 
       end process;  
+  
+   ----------Next State Logic----------------------------------------------
+  next_state_logic: Process(curState,start,bcd_counter,ctrlIn)
+    BEGIN
+      Case curState is 
+        when init =>
+          -- This is the initial state where the Comand Processor has its first contact with  the Data Processor
+          -- The start signal lets the dataprocessor when to strat the transition.
+            if start = '1' then
+              nextState <= first;
+            else 
+              nextState <= init;
+            end if;   
+            
+        when first =>
+          -- This state checks if there is a transition and the setting of a transition in the value of the ctrl signal. 
+          if CtrlIn_detected = '0' then 
+             nextState <= first;
+          else
+             nextState <= second;   
+          end if;  
+          
+        when second =>
+          -- The receive data state from the dat generator 
+          nextState <= third;
+          
+       	when third =>
+         		    nextState <= fourth; 
+              if bcd_counter = numWords_bcd then 
+                nextState <= fourth;
+              else
+               if start = '0' then
+                  nextState <= second;
+                else
+                  nextState <= first;
+                end if; 
+              end if;
+              
+        when fourth =>
+               nextState <= fifth;
+               
+        when fifth =>
+              nextState <= init;	      
+      end case;
+      end process;
       
-  ----------Output State -------------------------------------------------   
+  
+    ----------Output State -------------------------------------------------   
       out_state: process(curState)
     begin
        if curState = second then 
@@ -211,7 +227,7 @@ architecture behav of dataConsume is
 		      seqDone <= '1';
 		   end if; 
     end process;
-end behav;
   
   
   
+END; -- end architecture
