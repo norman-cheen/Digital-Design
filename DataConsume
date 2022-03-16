@@ -1,17 +1,4 @@
 
---package dataConsume_pack is
-
---	  type STATE_TYPE is
---		(
---			INIT,
---			REQ_DATA,
---			WAIT_DATA,
---			DATA_VALID,
---			UPDATE_REG
---		);
-		
---end dataConsume_pack;		
-
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned."+";
@@ -62,7 +49,7 @@ ARCHITECTURE bahav of dataConsume is
   SIGNAL max_index_sig: BCD_ARRAY_TYPE(2 DOWNTO 0);
   
   SIGNAL reg_data: std_logic_vector(7 downto 0); -- data from datagen has to be registered
-  SIGNAL ctrl_out_sig: std_logic;
+  SIGNAL ctrl_out_sig: std_logic := '0';
   
   
   SIGNAL bcd_counter_en: std_logic;
@@ -94,9 +81,7 @@ BEGIN
           digit10 := digit10 + 1;
         END IF;
         
-        IF digit10 < "1001" THEN       --if count less than 90
-          digit10  := digit10 + 1;
-        ELSE 
+        IF digit10 > "1001" THEN       --if count less than 90
           digit10  := "0000";          --if count >=90, carry out
           digit100 := digit100 + 1;
         END IF;
@@ -116,10 +101,9 @@ BEGIN
     VARIABLE reg_shift : CHAR_ARRAY_TYPE(6 DOWNTO 0) := ("00000000","00000000","00000000","00000000","00000000","00000000","00000000");
   BEGIN
     IF clk'EVENT AND clk='1' AND shifter_en='1' THEN
-      FOR i in 7 downto 1 LOOP
+      FOR i in 6 downto 1 LOOP
         reg_shift(i) := reg_shift(i-1);
       END LOOP;
-      
       reg_shift(0) := reg_data;  
     ELSE NULL;
     END IF;
@@ -143,20 +127,23 @@ BEGIN
   
   
   
-    ----------Two Phase Protocol----------------------------------------------     
- two_phase_protocol:process(clk,curState)
-    BEGIN 
+    ----------Two Phase Protocol----------------------------------------------  
+ Two_phase_protocol: process(curState)   
+ Begin
     if curState = first then
-       ctrl_out_sig <= not ctrl_out_sig;
+        ctrl_out_sig <= not ctrl_out_sig;
+       CtrlIn_detected <= CtrlIn_Reg xor ctrlIn;
+    else
+       CtrlIn_detected <= ctrlIn; 
+    end if;
+  end process;
+
+ Reg_Ctrl_in :process(clk)
+    BEGIN 
     if rising_edge(clk) then
        CtrlIn_Reg <= ctrlIn;
-     end if;
-     CtrlIn_detected <= CtrlIn_Reg xor ctrlIn;
-    else
-     CtrlIn_detected <= ctrlIn; 
     end if;
-    end process;
-  
+    END PROCESS;
   
   ----------Next State Clock----------------------------------------------     
   next_state_clk: process(clk,reset)
@@ -183,9 +170,10 @@ BEGIN
             
         when first =>
           -- This state checks if there is a transition and the setting of a transition in the value of the ctrl signal. 
+          
           if CtrlIn_detected = '0' then 
              nextState <= first;
-          else
+             else
              nextState <= second;   
           end if;  
           
@@ -198,7 +186,7 @@ BEGIN
               if bcd_counter = numWords_bcd then 
                 nextState <= fourth;
               else
-               if start = '0' then
+               if start = '1' then
                   nextState <= second;
                 else
                   nextState <= first;
@@ -217,6 +205,7 @@ BEGIN
     ----------Output State -------------------------------------------------   
       out_state: process(curState)
     begin
+   
        if curState = second then 
          byte <= data; 
          dataReady <= '1'; 
@@ -230,6 +219,7 @@ BEGIN
          else 
            dataThreshold <=  dataThreshold;  
            max_index_sig <= max_index_sig; 
+           peakdetected <= '0';
          end if;
        elsif  curState = third then
            bcd_counter_en <= '0';
