@@ -55,6 +55,7 @@ ARCHITECTURE bahav of dataConsume is
   SIGNAL bcd_counter_en: std_logic;
   SIGNAL bcd_counter_reset: std_logic;
   SIGNAL shifter_en: std_logic;
+  SIGNAL array1_reset: std_logic;
   
 BEGIN
    ctrlOut <= ctrl_out_sig;
@@ -100,12 +101,14 @@ BEGIN
   shifter: PROCESS (CLK)
     VARIABLE reg_shift : CHAR_ARRAY_TYPE(6 DOWNTO 0) := ("00000000","00000000","00000000","00000000","00000000","00000000","00000000");
   BEGIN
-    IF clk'EVENT AND clk='1' AND shifter_en='1' THEN
+    IF array1_reset = '1' THEN
+      reg_shift := ("00000000","00000000","00000000","00000000","00000000","00000000","00000000");
+    ELSIF clk'EVENT AND clk='1' AND shifter_en='1' THEN
       FOR i in 6 downto 1 LOOP
         reg_shift(i) := reg_shift(i-1);
       END LOOP;
-      reg_shift(0) := reg_data;  
-    ELSE NULL;
+      reg_shift(0) := reg_data;    
+    ELSE NULL;  
     END IF;
     
     array1 <= reg_shift;
@@ -199,8 +202,18 @@ BEGIN
     ----------Output State -------------------------------------------------   
       out_state: process(curState)
     begin
-   
-       if curState = second then 
+       if curState = init then 
+         bcd_counter_reset <= '1';
+         array1_reset <= '1';
+         seqDone <= '0';
+         maxIndex <= ("0000", "0000", "0000");
+        
+         
+       elsif curState = first then  
+         bcd_counter_reset <= '0';
+         array1_reset <= '0';
+        
+       elsif curState = second then 
          byte <= data; 
          dataReady <= '1'; 
          bcd_counter_en <='1';
@@ -213,7 +226,8 @@ BEGIN
          else 
            dataThreshold <=  dataThreshold;  
            max_index_sig <= max_index_sig; 
-         end if;
+           peakdetected <= '0';
+         end if; 
        elsif  curState = third then
            shifter_en <= '0';
            bcd_counter_en <= '0';
@@ -222,6 +236,7 @@ BEGIN
 		     maxIndex <= max_index_sig;
 		   elsif curState = fifth then
 		      seqDone <= '1';
+		      dataThreshold <= "00000000";
 		   end if; 
     end process;
   
