@@ -7,13 +7,15 @@ ENTITY PatternRecog IS
 PORT (
     clk:		in std_logic;
     reset:		in std_logic;
-    rxNow:		out std_logic;
+    rxNow:		in std_logic;     -- valid (dataReady) signal from Rx
     rxData:			in std_logic_vector (7 downto 0);
     rxDone:		out std_logic;
-    dataReady: in std_logic);     
-END;
+    ensr: out std_logic;
+    aNNN_valid: out std_logic
+    );     
+END PatternRecog;
 
-ARCHITECTURE aNNN of PatternRecog IS  
+ARCHITECTURE aANNN of PatternRecog IS  
 
   COMPONENT UART_RX_CTRL IS
       PORT(
@@ -30,9 +32,7 @@ ARCHITECTURE aNNN of PatternRecog IS
     
     TYPE state_type IS (IDLE, READ_A_a, READ_N1, READ_N2, READ_N3);
     SIGNAL curState, nextState: state_type;
-    SIGNAL ensr : std_logic;
-    
-    
+    SIGNAL sig_ensr, sig_aNNN_valid : std_logic;
     
     signal sig_rxDone, sig_rxNow, sig_ovErr, sig_framErr: std_logic;
     signal sig_rx: std_logic; 
