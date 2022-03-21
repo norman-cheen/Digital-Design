@@ -42,7 +42,6 @@ ARCHITECTURE bahav of dataConsume is
   SIGNAL bcd_counter: BCD_ARRAY_TYPE(2 DOWNTO 0) := ("0000", "0000", "0000");
   SIGNAL array1: CHAR_ARRAY_TYPE(6 DOWNTO 0) := ("00000000","00000000","00000000","00000000","00000000","00000000","00000000");
   SIGNAL array2: CHAR_ARRAY_TYPE(6 DOWNTO 0) := ("00000000","00000000","00000000","00000000","00000000","00000000","00000000");
-  SIGNAL peakDetected: std_logic;
   SIGNAL dataThreshold: std_logic_vector(7 downto 0) := ("00000000");
   SIGNAL CtrlIn_Reg: std_logic;
   SIGNAL grtthan,equals: std_logic; 
@@ -119,11 +118,9 @@ BEGIN
   pendingResult: Process (CLK)
   BEGIN
     IF reset = '1' THEN 
-      array2 <= ("00000000","00000000","00000000","00000000","00000000","00000000","00000000");
-    ELSIF peakDetected = '1' THEN
-      IF dataThreshold = array1(3) THEN
+      array2 <= ("00000000","00000000","00000000","00000000","00000000","00000000","00000000");      
+    ELSIF dataThreshold = array1(3) THEN
         array2 <= array1;
-      END IF;
     END IF;
   END PROCESS; --pendingResult
   
@@ -222,11 +219,9 @@ BEGIN
          if grtthan = '1' then 
             dataThreshold <= data;
             max_index_sig <= bcd_counter;
-            peakdetected <= '1';
          else 
            dataThreshold <=  dataThreshold;  
            max_index_sig <= max_index_sig; 
-           peakdetected <= '0';
          end if; 
        elsif  curState = third then
            shifter_en <= '0';
