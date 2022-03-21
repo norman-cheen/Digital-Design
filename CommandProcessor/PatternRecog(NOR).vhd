@@ -40,14 +40,18 @@ ARCHITECTURE aANNN of PatternRecog IS
       
 BEGIN
   
-  combi_nextState: PROCESS(curState, rxData, dataReady)
+  combi_nextState: PROCESS(curState, rxData, rxNow)
   BEGIN      
-    CASE curState IS
+      rxDone<= '0';  
+      ensr <= '0';
+      aNNN_valid <= '0';
+    
+      CASE curState IS
       
       WHEN IDLE =>
-        rxNow <= '0';
         ensr <= '0';
-        IF dataReady = '1' THEN
+        aNNN_valid <= '0';
+        IF rxNow = '1' THEN
           IF rxData = X"61" or rxData = X"41" THEN --in decimal 97(a) and 65(A)
             nextState <= READ_A_a;
             rxDone<= '1';
@@ -58,9 +62,9 @@ BEGIN
         END IF;
         
       WHEN READ_A_a =>
-        rxNow <= '0';
         ensr <= '0';
-        IF dataReady = '1' THEN
+        aNNN_valid <= '0';
+        IF rxNow = '1' THEN
           IF ((rxData >= X"30") and (rxData <= X"39")) THEN
             nextState <= READ_N1;
             rxDone<= '1';
@@ -74,8 +78,8 @@ BEGIN
         END IF;
           
       WHEN READ_N1 =>
-        rxNow <= '0';
-        IF dataReady = '1' THEN
+        aNNN_valid <= '0';  
+        IF rxNow = '1' THEN
           IF ((rxData >= X"30") and (rxData <= X"39")) THEN
             nextState <= READ_N1;
             rxDone<= '1';
@@ -83,15 +87,16 @@ BEGIN
           ELSIF rxData = X"61" or rxData = X"41" THEN
             nextState <= READ_A_a;
             rxDone<= '1';
+            ensr <= '0';
           ELSE
             nextState <= IDLE;
             rxDone<= '1';
+            ensr <= '0';
           END IF;
         END IF;
             
       WHEN READ_N2 =>
-        rxNow <= '0';
-        IF dataReady = '1' THEN
+        IF rxNow = '1' THEN
           IF ((rxData >= X"30") and (rxData <= X"39")) THEN
             nextState <= READ_N1;
             rxDone<= '1';
@@ -99,15 +104,17 @@ BEGIN
           ELSIF rxData = X"61" or rxData = X"41" THEN
             nextState <= READ_A_a;
             rxDone<= '1';
+            ensr <= '0';
           ELSE
             nextState <= IDLE;
             rxDone<= '1';
+            ensr <= '0';
           END IF;
         END IF;  
         
       WHEN READ_N3 =>
-        rxNow <= '1';
-        IF dataReady = '1' THEN
+        aNNN_valid <= '1';
+        IF rxNow = '1' THEN
           IF ((rxData >= X"30") and (rxData <= X"39")) THEN
             nextState <= IDLE;
             rxDone<= '1';
@@ -115,9 +122,11 @@ BEGIN
           ELSIF rxData = X"61" or rxData = X"41" THEN
             nextState <= READ_A_a;
             rxDone<= '1';
+            ensr <= '0';
           ELSE
             nextState <= IDLE;
             rxDone<= '1';
+            ensr <= '0';
           END IF;
         END IF;   
         
@@ -126,7 +135,7 @@ BEGIN
   
   state_reg: PROCESS(clk, reset)
   BEGIN
-    IF reset = '0' THEN
+    IF reset = '1' THEN
       curState <= IDLE;
     ELSIF clk'event AND clk='1' THEN
       curState <= nextState;
