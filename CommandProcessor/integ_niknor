@@ -1,0 +1,88 @@
+  combi_nextState: PROCESS(curState, rxData, rxNow)
+  BEGIN      
+    
+    rxDone <= '0';
+    
+    CASE curState IS 
+      WHEN IDLE =>
+        numWords_bcd(0) <= "0000";
+        numWords_bcd(1) <= "0000";
+        numWords_bcd(2) <= "0000";
+        IF rxNow = '1' THEN
+          rxDone<= '1';
+          IF rxData = X"61" or rxData = X"41" THEN --in decimal 97(a) and 65(A)
+            nextState <= READ_A_a;
+          ELSE
+            nextState <= IDLE;
+          END IF;
+        END IF;
+        
+      WHEN READ_A_a =>
+        IF rxNow = '1' THEN
+          rxDone<= '1';
+          IF ((rxData >= X"30") and (rxData <= X"39")) THEN
+            nextState <= READ_N1;
+          ELSIF (rxData = X"61" or rxData = X"41") THEN
+            nextState <= READ_A_a;
+          ELSE
+            nextState <= IDLE;
+          END IF;
+        END IF;
+        
+      WHEN READ_N1 =>
+        IF ((rxData >= X"30") and (rxData <= X"39")) THEN
+          nextState <= firstN;
+        ELSIF (rxData = X"61" or rxData = X"41") THEN
+          nextState <= READ_A_a;
+        ELSE
+          nextState <= IDLE;
+        END IF;
+        
+      when firstN =>
+        IF rxNow = '1' THEN
+          rxDone<= '1';
+          numWords_bcd(2) <= rxData(3 downto 0);
+          nextState <= READ_N2;
+        END IF;
+          
+      WHEN READ_N2 =>
+        IF ((rxData >= X"30") and (rxData <= X"39")) THEN
+          nextState <= secondN;
+        ELSIF rxData = X"61" or rxData = X"41" THEN
+          numWords_bcd(2) <= "0000";
+          nextState <= READ_A_a;
+        ELSE
+          nextState <= IDLE;
+        END IF;
+
+      when secondN =>
+        IF rxNow = '1' THEN
+          rxDone<= '1';
+          numWords_bcd(1) <= rxData(3 downto 0);
+          nextState <= READ_N3;
+        END IF;
+        
+      WHEN READ_N3 =>
+        IF ((rxData >= X"30") and (rxData <= X"39")) THEN
+          nextState <= thirdN;
+        ELSIF rxData = X"61" or rxData = X"41" THEN
+          numWords_bcd(1) <= "0000";
+          numWords_bcd(2) <= "0000";
+          nextState <= READ_A_a;
+        ELSE
+          nextState <= IDLE;
+        END IF;
+        
+      when thirdN =>
+        IF rxNow = '1' THEN
+          rxDone <= '1';
+          numWords_bcd(0) <= rxData(3 downto 0);
+          start <= '1';
+          nextState <= IDLE;
+        END IF;
+       
+      WHEN OTHERS => 
+        nextState <= IDLE;
+         
+    END CASE;
+  END PROCESS;
