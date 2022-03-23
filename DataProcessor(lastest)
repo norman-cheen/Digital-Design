@@ -1,17 +1,3 @@
-
---package dataConsume_pack is
-
---	  type STATE_TYPE is
---		(
---			INIT,
---			REQ_DATA,
---			WAIT_DATA,
---			DATA_VALID,
---			UPDATE_REG
---		);
-		
---end dataConsume_pack;		
-
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned."+";
@@ -27,7 +13,7 @@ entity dataConsume is
 		start: in std_logic; -- goes high to signal data transfer
 		numWords_bcd: in BCD_ARRAY_TYPE(2 downto 0);
 		ctrlIn: in std_logic;
-		ctrlOut: out std_logic;
+		ctrlOut: out std_logic:= '0';
 		data: in std_logic_vector(7 downto 0);
 		dataReady: out std_logic;
 		byte: out std_logic_vector(7 downto 0);
@@ -49,12 +35,13 @@ ARCHITECTURE bahav of dataConsume is
 	     );
     end component;
   
-  TYPE state_type IS (init,first,second,third,fourth,fifth); 
+  TYPE state_type IS (init,first,second,third,fourth,fifth,wait_state); 
   SIGNAL curState, nextState: state_type; 
   
   SIGNAL bcd_counter: BCD_ARRAY_TYPE(2 DOWNTO 0) := ("0000", "0000", "0000");
   SIGNAL array1: CHAR_ARRAY_TYPE(6 DOWNTO 0) := ("00000000","00000000","00000000","00000000","00000000","00000000","00000000");
   SIGNAL array2: CHAR_ARRAY_TYPE(6 DOWNTO 0) := ("00000000","00000000","00000000","00000000","00000000","00000000","00000000");
+  SIGNAL array3: CHAR_ARRAY_TYPE(6 DOWNTO 0) := ("00000000","00000000","00000000","00000000","00000000","00000000","00000000");
   SIGNAL dataThreshold: std_logic_vector(7 downto 0) := ("00000000");
   SIGNAL CtrlIn_Reg: std_logic;
   SIGNAL grtthan,equals: std_logic; 
@@ -70,8 +57,9 @@ ARCHITECTURE bahav of dataConsume is
   SIGNAL array1_reset: std_logic;
   
 BEGIN
-   ctrlOut <= ctrl_out_sig;
-
+  
+  ctrlOut <= ctrl_out_sig;
+  
   ---------Comparator Port Mapping ---------------------------------
   Comp1: comparator port map(data,dataThreshold,grtthan,equals);
     
@@ -134,10 +122,13 @@ BEGIN
       array2 <= ("00000000","00000000","00000000","00000000","00000000","00000000","00000000");      
     ELSIF dataThreshold = array1(3) THEN
         array2 <= array1;
+        FOR i in  0 to 6 LOOP
+            array3(i) <= array2 (6-i);
+        END LOOP;        
     END IF;
   END PROCESS; --pendingResult
   
-  
+
   
   
     ----------Two Phase Protocol----------------------------------------------  
@@ -192,13 +183,20 @@ BEGIN
         when second =>
           -- The receive data state from the dat generator 
           nextState <= third;
-          
+        
        	when third => 
               if bcd_counter = numWords_bcd then 
                   nextState <= fourth;
               else
-                  nextState <= first; 
+                  nextState <= wait_state; 
               end if;
+              
+        when wait_state =>
+          if start = '1' then
+              nextState <= first;
+          else 
+              nextState <= wait_state;
+          end if;
               
         when fourth =>
                nextState <= fifth;
@@ -217,7 +215,7 @@ BEGIN
          array1_reset <= '1';
          seqDone <= '0';
          maxIndex <= ("0000", "0000", "0000");
-        
+         
          
        elsif curState = first then  
          bcd_counter_reset <= '0';
@@ -240,8 +238,9 @@ BEGIN
            shifter_en <= '0';
            bcd_counter_en <= '0';
            dataReady <= '0';
-		   elsif curState = fourth then 
-		     dataResults <= array2;
+		   elsif curState = fourth then
+		    ---------------Array Flipping-------------------------------------------------------
+		     dataResults <= array3;
 		     maxIndex <= max_index_sig;
 		   elsif curState = fifth then
 		      seqDone <= '1';
