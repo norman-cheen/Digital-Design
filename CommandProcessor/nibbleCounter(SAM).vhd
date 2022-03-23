@@ -4,91 +4,226 @@ use ieee.numeric_std.all;
 
 ENTITY dataConversion IS
   PORT(
+    clk:in std_logic;
+    reset:in std_logic;
     dataReady: in std_logic;
-    dataIn: in std_logic_vector(7 downto 0);
-    TxDone: in std_logic;
+    dataIn: in std_logic_vector(7 downto 0);  --data from data processor
+    command: in std_logic_vector(7 downto 0);
+    txDone: in std_logic;
     seqDone: in std_logic;
     rxDone: in std_logic;
     aNNN_ready: in std_logic;
     dataOut: out std_logic_vector(7 downto 0);
-    )
+    txNow : out std_logic
+  );
 END dataConversion;
 
 ARCHITECTURE arc OF dataConversion IS
-  SIGNAL convDone: std_logic;   --active HIGH
-  TYPE state_type IS (INIT, CONVERSION, SET_FIRST_DIGIT, SEND_FIRST_DIGIT, SEND_SECOND_DIGIT,SET_SECOND_DIGIT,SET_SPACE,SEND_SPACE,WAIT_SEND,ECHO_COMMAND);
+  SIGNAL resetCounter,resetRegister, Count_en,R1_en,R2_en: std_logic;   --active HIGH
+  TYPE state_type IS (INIT, CONVERSION, SET_FIRST_DIGIT, SEND_FIRST_DIGIT, SEND_SECOND_DIGIT,SET_SECOND_DIGIT,SET_SPACE,SEND_SPACE,ECHO_COMMAND,SEND_COMMAND,SET_NEW_LINE,SEND_NEW_LINE);
   SIGNAL curState, nextState : state_type;
-  SIGNAL firstDigitASCII, secondDigitASCII : std_logic_vector(7 downto 0);
+  SIGNAL firstDigitASCII, secondDigitASCII, reg_firstDigitASCII, reg_secondDigitASCII : std_logic_vector(7 downto 0); --initialised and values defined in conversion process
+  SIGNAL count : integer; --initialised by resetCounter
+  
+  
   
 BEGIN
-nextState:PROCESS(curState,DataReady,convDone, TxDone)
+combi_nextState:PROCESS(curState,DataReady,txDone,rxDone,aNNN_ready,Count)
   BEGIN
-    CASE curState IS
-      WHEN INIT =>
-        IF DataReady = '1' THEN
-          nextState <= CONVERSION;
-        ELSIF rxDone = '1' THEN
-          nextState <= ECHO_COMMAND;
-        ELSE
+    IF reset = '1' THEN
+      nextState <= INIT;
+    ELSE
+      CASE curState IS
+        WHEN INIT =>
+          IF DataReady = '1' THEN
+            nextState <= CONVERSION;
+          ELSIF rxDone = '1' THEN
+            nextState <= ECHO_COMMAND;
+          ELSIF aNNN_ready ='1' THEN
+            nextState <= SET_NEW_LINE;
+          ELSE
+            nextState <= INIT;
+          END IF;
+        
+        WHEN ECHO_COMMAND =>
+          IF txDone ='1' THEN
+            nextState <= SEND_COMMAND;
+          ELSE
+            nextState <= ECHO_COMMAND;
+          END IF;
+        
+        WHEN SEND_COMMAND =>
           nextState <= INIT;
-        END IF;
-        
-      WHEN ECHO_COMMAND =>
-        nextState <= SEND;
-        
       
+        WHEN SET_NEW_LINE =>
+          IF txDone='1' THEN
+            nextState <= SEND_NEW_LINE;
+          ELSE
+            nextState <= SET_NEW_LINE;
+          END IF;
+        
+        WHEN SEND_NEW_LINE =>
+          nextState <= INIT;
           
-      WHEN CONVERSION =>
-        IF convDone = '1' AND txDone = '1' THEN
-          nextState <= SEND_FIRST_DIGIT;
-        ELSE
-          nextState <= CONVERSION;
-        END IF;
+        WHEN CONVERSION =>
+          IF Count>=2 AND txDone = '1' THEN
+            nextState <= SEND_FIRST_DIGIT;
+          ELSE
+            nextState <= CONVERSION;
+          END IF;
         
-      WHEN SEND_FIRST_DIGIT =>
-        nextState <= SET_SECOND_DIGIT; 
+        WHEN SEND_FIRST_DIGIT =>
+          nextState <= SET_SECOND_DIGIT; 
         
-      WHEN SET_SECOND_DIGIT =>
-        IF txDone = '1' THEN
-          nextState <= SEND_SECOND_DIGIT;
-        ELSE
-          nextState <= SET_SECOND_DIGIT;
-        END IF;
+        WHEN SET_SECOND_DIGIT =>
+          IF txDone = '1' THEN
+            nextState <= SEND_SECOND_DIGIT;
+          ELSE
+            nextState <= SET_SECOND_DIGIT;
+          END IF;
            
         
-      WHEN SEND_SECOND_DIGIT =>
-        nextState <= SET_SPACE;
-        
-      WHEN SET_SPACE =>
-        IF txDone = '1' THEN 
-          nextState <= SEND;
-        ELSE 
+        WHEN SEND_SECOND_DIGIT =>
           nextState <= SET_SPACE;
-        END IF;
+        
+        WHEN SET_SPACE =>
+          IF txDone = '1' THEN 
+            nextState <= SEND_SPACE;
+          ELSE 
+            nextState <= SET_SPACE;
+          END IF;
           
-      WHEN SEND =>  --Anytime we need to send something and the next state is INIT we just use SEND, to reduce the number of total states
-        nextState <= INIT;
+        WHEN SEND_SPACE =>  --Anytime we need to send something and the next state is INIT we just use SEND, to reduce the number of total states
+          nextState <= INIT;
       
         
-    END CASE;
+      END CASE;
+    END IF;
   END PROCESS;
 
 
-combi_out:PROCESS(curState)
+combi_out:PROCESS(curState,command,reg_firstDigitASCII,reg_secondDigitASCII)
   BEGIN
     CASE curState IS
       WHEN INIT =>
-        TxNow <= '0';
-        convDone <= '0';
-      WHEN 
+        txNow <= '0';
+        resetCounter <='1';
+        resetRegister <='1';
+        Count_en <= '0';
+        R1_en <= '0';
+        R2_en <= '0';
+        dataOut <= TO_UNSIGNED(0,8);
+        
+      WHEN ECHO_COMMAND =>
+        txNow <= '0';
+        resetCounter <= '0';
+        resetRegister <= '0';
+        Count_en <= '0';
+        R1_en <= '0';
+        R2_en <= '0';
+        dataOut <= command;
+        
+      WHEN SEND_COMMAND =>
+        txNow <= '1';
+        resetCounter <= '0';
+        resetRegister <= '0';
+        Count_en <= '0';
+        R1_en <= '0';
+        R2_en <= '0';
+        dataOut <= command;
+        
+      WHEN CONVERSION =>
+        txNow <= '0';
+        resetCounter <= '0';
+        resetRegister <= '0';
+        Count_en <= '1';
+        R1_en <= '1';
+        R2_en <= '1';
+        dataOut <= reg_firstDigitASCII;
+        
+      WHEN SEND_FIRST_DIGIT =>
+        txNow <= '1';
+        resetCounter <= '0';
+        resetRegister <= '0';
+        Count_en <= '0';
+        R1_en <= '0';
+        R2_en <= '0';
+        dataOut <= reg_firstDigitASCII;
+        
+      WHEN SET_SECOND_DIGIT =>
+        txNow <= '0';
+        resetCounter <= '0';
+        resetRegister <= '0';
+        Count_en <= '0';
+        R1_en <= '0';
+        R2_en <= '0';
+        dataOut <= reg_secondDigitASCII;
+        
+      WHEN SEND_SECOND_DIGIT =>
+        txNow <= '1';
+        resetCounter <= '0';
+        resetRegister <= '0';
+        Count_en <= '0';
+        R1_en <= '0';
+        R2_en <= '0';
+        dataOut <= reg_secondDigitASCII;
+        
+      WHEN SET_SPACE =>
+        txNow <= '0';
+        resetCounter <= '0';
+        resetRegister <= '0';
+        Count_en <= '0';
+        R1_en <= '0';
+        R2_en <= '0';
+        dataOut <= "00100000";  --ASCII code of space
+        
+      WHEN SEND_SPACE =>
+        txNow <= '1';
+        resetCounter <= '0';
+        resetRegister <='0';
+        Count_en <= '0';
+        R1_en <= '0';
+        R2_en <= '0';
+        dataOut <= "00100000"; 
+        
+      WHEN SET_NEW_LINE =>
+        txNow <= '0';
+        resetCounter <= '0';
+        resetRegister <='0';
+        Count_en <= '0';
+        R1_en <= '0';
+        R2_en <= '0';
+        dataOut <= "00001010"; --Line feed (\n) ASCII code
+        
+      WHEN SEND_NEW_LINE =>
+        txNow <= '1';
+        resetCounter <= '0';
+        resetRegister <='0';
+        Count_en <= '0';
+        R1_en <= '0';
+        R2_en <= '0';
+        dataOut <= "00001010";
+        
+      WHEN OTHERS =>
+        txNow <= '0';
+        resetCounter <= '0';
+        resetRegister <='0';
+        Count_en <= '0';
+        R1_en <= '0';
+        R2_en <= '0';
+        dataOut <= TO_UNSIGNED(0,8);
+        
+    END CASE;
+  END PROCESS;
+        
         
         
 data_conversion:PROCESS(curState,dataIn)
-  SIGNAL firstDigit,secondDigit : std_logic_vector(3 downto 0); --firstDigit is the most significant digit in the hexadecimal number pair (bit 4 to 7), the first digit to be sent
+  VARIABLE firstDigit,secondDigit : std_logic_vector(3 downto 0); --firstDigit is the most significant digit in the hexadecimal number pair (bit 4 to 7), the first digit to be sent
   BEGIN
-    IF curState=CONVERSION THEN
-      firstDigit <= dataIn(7 downto 4);
-      secondDigit <= dataIn(3 downto 0);
+      IF curState=CONVERSION THEN
+      firstDigit := dataIn(7 downto 4);
+      secondDigit := dataIn(3 downto 0);
       CASE firstDigit IS
         WHEN "0000" => firstDigitASCII <= "00110000";
         WHEN "0001" => firstDigitASCII <= "00110001";
@@ -127,10 +262,55 @@ data_conversion:PROCESS(curState,dataIn)
         WHEN "1111" => secondDigitASCII <= "01000110";
       END CASE;
       
-  ELSE 
-    firstDigit <= TO_UNSIGNED(3 downto 0);
-    secondDigit <= TO_UNSIGNED (3 downto 0);
-    firstDigitASCII <= TO_UNSIGNED(7 downto 0);
-    secondDigitASCII <= TO_UNSIGNED(7 downto 0);
+    ELSE 
+      firstDigit := TO_UNSIGNED(0,4);
+      secondDigit := TO_UNSIGNED(0,4);
+      firstDigitASCII <= TO_UNSIGNED(0,8);
+      secondDigitASCII <= TO_UNSIGNED(0,8);
     
-  END IF;
+    END IF;
+  END PROCESS;
+  
+firstDigitRegister: PROCESS(resetRegister,clk)
+  BEGIN
+    IF resetRegister = '1' THEN
+      reg_firstDigitASCII <= TO_UNSIGNED(0,8);
+    ELSIF clk'event AND clk='1' THEN
+      IF R1_en = '1' THEN
+        reg_firstDigitASCII <= firstDigitASCII; 
+      END IF;
+    END IF;
+  END PROCESS;      
+  
+secondDigitRegister: PROCESS(resetRegiser,clk)
+  BEGIN
+    IF resetRegister = '1' THEN
+      reg_secondDigitASCII <= TO_UNSIGNED(0,8);
+    ELSIF clk'event AND clk='1' THEN
+      IF R2_en = '1' THEN
+        reg_secondDigitASCII <= secondDigitASCII; 
+      END IF;
+    END IF;
+  END PROCESS;      
+      
+counter:PROCESS(resetCounter,clk)  --counter is to make sure the FSM stays in the conversion state for at least 2 clock cycles so that the converted numbers could be registered
+  BEGIN                            --2 cycles is needed as the conversion could only be completed a couple delta delays after entering the conversion state 
+		IF resetCounter = '1'  THEN    --This means that the register whose input is only transparent to the output at the rising edge would not be able to catch the converted numbers
+		  Count <= 0;                  --if it only stays a single clock cycle. 
+		ELSIF clk'EVENT and clk='1' THEN
+		  IF Count_en='1' THEN -- enable
+		    Count <= Count + 1;
+		  END IF;
+		END IF;
+  END PROCESS;
+  
+seq_state : PROCESS(clk)  --sequential state updating
+  BEGIN
+    IF clk'EVENT and clk='1' THEN
+      curState <= nextState;
+    END IF;
+  END PROCESS;
+      
+      
+        
+
