@@ -155,3 +155,13 @@ BEGIN
    );   	
    
 END;
+
+
+  reset_bcd_array: PROCESS(reset,res_bcd_array)
+	BEGIN
+	  IF reset = '1' OR res_bcd_array = '1' THEN 
+	    bcd_array(2) <= "1111";  -- MSB
+      bcd_array(1) <= "1111";
+      bcd_array(0) <= "1111";  -- LSB 
+	  END IF;
+	END PROCESS;
