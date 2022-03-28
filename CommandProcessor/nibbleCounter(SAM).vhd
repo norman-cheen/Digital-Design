@@ -7,20 +7,20 @@ ENTITY dataConversion IS
     clk:in std_logic;
     reset:in std_logic;
     dataReady: in std_logic;
-    dataIn: in std_logic_vector(7 downto 0);  --data from data processor
-    command: in std_logic_vector(7 downto 0);
-    txDone: in std_logic;
-    seqDone: in std_logic;
+    byte: in std_logic_vector(7 downto 0);  --data from data processor
+    rxData: in std_logic_vector(7 downto 0); --command received from rx unit
+    txDone: in std_logic; 
     rxDone: in std_logic;
-    aNNN_ready: in std_logic;
-    dataOut: out std_logic_vector(7 downto 0);
-    txNow : out std_logic
+    aNNN_valid: in std_logic;
+    txData: out std_logic_vector(7 downto 0); --data sent to tx unit
+    txNow : out std_logic;
+    start : out std_logic
   );
 END dataConversion;
 
 ARCHITECTURE arc OF dataConversion IS
-  SIGNAL resetCounter,resetRegister, Count_en,R1_en,R2_en: std_logic;   --active HIGH
-  TYPE state_type IS (INIT, CONVERSION, SET_FIRST_DIGIT, SEND_FIRST_DIGIT, SEND_SECOND_DIGIT,SET_SECOND_DIGIT,SET_SPACE,SEND_SPACE,ECHO_COMMAND,SEND_COMMAND,SET_NEW_LINE,SEND_NEW_LINE);
+  SIGNAL resetCounter,resetRegister, Count_en,R1_en,R2_en,reg_aNNN_valid,reset_aNNN_valid: std_logic;   --active HIGH
+  TYPE state_type IS (INIT, CONVERSION, SEND_FIRST_DIGIT, SEND_SECOND_DIGIT,SET_SECOND_DIGIT,SET_SPACE,SEND_SPACE,ECHO_COMMAND,SEND_COMMAND,SET_NEW_LINE,SEND_NEW_LINE,SEND_START);
   SIGNAL curState, nextState : state_type;
   SIGNAL firstDigitASCII, secondDigitASCII, reg_firstDigitASCII, reg_secondDigitASCII : std_logic_vector(7 downto 0); --initialised and values defined in conversion process
   SIGNAL count : integer; --initialised by resetCounter
@@ -28,7 +28,7 @@ ARCHITECTURE arc OF dataConversion IS
   
   
 BEGIN
-combi_nextState:PROCESS(curState,DataReady,txDone,rxDone,aNNN_ready,Count)
+combi_nextState:PROCESS(curState,DataReady,txDone,rxDone,reg_aNNN_valid,Count)
   BEGIN
     IF reset = '1' THEN
       nextState <= INIT;
@@ -39,7 +39,7 @@ combi_nextState:PROCESS(curState,DataReady,txDone,rxDone,aNNN_ready,Count)
             nextState <= CONVERSION;
           ELSIF rxDone = '1' THEN
             nextState <= ECHO_COMMAND;
-          ELSIF aNNN_ready ='1' THEN
+          ELSIF reg_aNNN_valid ='1' THEN
             nextState <= SET_NEW_LINE;
           ELSE
             nextState <= INIT;
@@ -63,6 +63,9 @@ combi_nextState:PROCESS(curState,DataReady,txDone,rxDone,aNNN_ready,Count)
           END IF;
         
         WHEN SEND_NEW_LINE =>
+          nextState <= SEND_START;
+          
+        WHEN SEND_START =>
           nextState <= INIT;
           
         WHEN CONVERSION =>
@@ -94,7 +97,7 @@ combi_nextState:PROCESS(curState,DataReady,txDone,rxDone,aNNN_ready,Count)
           END IF;
           
         WHEN SEND_SPACE =>  --Anytime we need to send something and the next state is INIT we just use SEND, to reduce the number of total states
-          nextState <= INIT;
+          nextState <= SEND_START;
       
         
       END CASE;
@@ -102,7 +105,7 @@ combi_nextState:PROCESS(curState,DataReady,txDone,rxDone,aNNN_ready,Count)
   END PROCESS;
 
 
-combi_out:PROCESS(curState,command,reg_firstDigitASCII,reg_secondDigitASCII)
+combi_out:PROCESS(curState,rxData,reg_firstDigitASCII,reg_secondDigitASCII)
   BEGIN
     CASE curState IS
       WHEN INIT =>
@@ -112,7 +115,9 @@ combi_out:PROCESS(curState,command,reg_firstDigitASCII,reg_secondDigitASCII)
         Count_en <= '0';
         R1_en <= '0';
         R2_en <= '0';
-        dataOut <= TO_UNSIGNED(0,8);
+        txData <= "00000000";
+        start <= '0';
+        reset_aNNN_valid <= '1';
         
       WHEN ECHO_COMMAND =>
         txNow <= '0';
@@ -121,7 +126,9 @@ combi_out:PROCESS(curState,command,reg_firstDigitASCII,reg_secondDigitASCII)
         Count_en <= '0';
         R1_en <= '0';
         R2_en <= '0';
-        dataOut <= command;
+        txData <= rxData;
+        start <= '0';
+        reset_aNNN_valid <= '0';
         
       WHEN SEND_COMMAND =>
         txNow <= '1';
@@ -130,7 +137,9 @@ combi_out:PROCESS(curState,command,reg_firstDigitASCII,reg_secondDigitASCII)
         Count_en <= '0';
         R1_en <= '0';
         R2_en <= '0';
-        dataOut <= command;
+        txData <= rxData;
+        start <= '0';
+        reset_aNNN_valid <= '0';
         
       WHEN CONVERSION =>
         txNow <= '0';
@@ -139,7 +148,9 @@ combi_out:PROCESS(curState,command,reg_firstDigitASCII,reg_secondDigitASCII)
         Count_en <= '1';
         R1_en <= '1';
         R2_en <= '1';
-        dataOut <= reg_firstDigitASCII;
+        txData <= reg_firstDigitASCII;
+        start <= '0';
+        reset_aNNN_valid <= '0';
         
       WHEN SEND_FIRST_DIGIT =>
         txNow <= '1';
@@ -148,7 +159,9 @@ combi_out:PROCESS(curState,command,reg_firstDigitASCII,reg_secondDigitASCII)
         Count_en <= '0';
         R1_en <= '0';
         R2_en <= '0';
-        dataOut <= reg_firstDigitASCII;
+        txData <= reg_firstDigitASCII;
+        start <= '0';
+        reset_aNNN_valid <= '0';
         
       WHEN SET_SECOND_DIGIT =>
         txNow <= '0';
@@ -157,7 +170,9 @@ combi_out:PROCESS(curState,command,reg_firstDigitASCII,reg_secondDigitASCII)
         Count_en <= '0';
         R1_en <= '0';
         R2_en <= '0';
-        dataOut <= reg_secondDigitASCII;
+        txData <= reg_secondDigitASCII;
+        start <= '0';
+        reset_aNNN_valid <= '0';
         
       WHEN SEND_SECOND_DIGIT =>
         txNow <= '1';
@@ -166,7 +181,9 @@ combi_out:PROCESS(curState,command,reg_firstDigitASCII,reg_secondDigitASCII)
         Count_en <= '0';
         R1_en <= '0';
         R2_en <= '0';
-        dataOut <= reg_secondDigitASCII;
+        txData <= reg_secondDigitASCII;
+        start <= '0';
+        reset_aNNN_valid <= '0';
         
       WHEN SET_SPACE =>
         txNow <= '0';
@@ -175,7 +192,9 @@ combi_out:PROCESS(curState,command,reg_firstDigitASCII,reg_secondDigitASCII)
         Count_en <= '0';
         R1_en <= '0';
         R2_en <= '0';
-        dataOut <= "00100000";  --ASCII code of space
+        txData <= "00100000";  --ASCII code of space
+        start <= '0';
+        reset_aNNN_valid <= '0';
         
       WHEN SEND_SPACE =>
         txNow <= '1';
@@ -184,7 +203,10 @@ combi_out:PROCESS(curState,command,reg_firstDigitASCII,reg_secondDigitASCII)
         Count_en <= '0';
         R1_en <= '0';
         R2_en <= '0';
-        dataOut <= "00100000"; 
+        txData <= "00100000";
+        start <= '0'; --initiate new data retrieval cycle, this can be placed here because the machine stays in "SEND_SPACE" only for 1 clock cycle
+        reset_aNNN_valid <= '0';           
+         
         
       WHEN SET_NEW_LINE =>
         txNow <= '0';
@@ -193,7 +215,9 @@ combi_out:PROCESS(curState,command,reg_firstDigitASCII,reg_secondDigitASCII)
         Count_en <= '0';
         R1_en <= '0';
         R2_en <= '0';
-        dataOut <= "00001010"; --Line feed (\n) ASCII code
+        txData <= "00001010"; --Line feed (\n) ASCII code   --seems like they want carriage return 00001101
+        start <= '0';
+        reset_aNNN_valid <= '0';
         
       WHEN SEND_NEW_LINE =>
         txNow <= '1';
@@ -202,7 +226,21 @@ combi_out:PROCESS(curState,command,reg_firstDigitASCII,reg_secondDigitASCII)
         Count_en <= '0';
         R1_en <= '0';
         R2_en <= '0';
-        dataOut <= "00001010";
+        txData <= "00001010";
+        start <= '0';
+        reset_aNNN_valid <= '1';
+        
+      WHEN SEND_START =>
+        txNow <= '0';
+        resetCounter <= '0';
+        resetRegister <='0';
+        Count_en <= '0';
+        R1_en <= '0';
+        R2_en <= '0';
+        txData <= "00000000";
+        start <= '1';  --Inititate data retrieval process after sending new line or space
+        reset_aNNN_valid <= '0';
+        
         
       WHEN OTHERS =>
         txNow <= '0';
@@ -211,19 +249,21 @@ combi_out:PROCESS(curState,command,reg_firstDigitASCII,reg_secondDigitASCII)
         Count_en <= '0';
         R1_en <= '0';
         R2_en <= '0';
-        dataOut <= TO_UNSIGNED(0,8);
+        txData <= "00000000";
+        start <= '0';
+        reset_aNNN_valid <= '0';
         
     END CASE;
   END PROCESS;
         
         
         
-data_conversion:PROCESS(curState,dataIn)
+data_conversion:PROCESS(curState,byte)
   VARIABLE firstDigit,secondDigit : std_logic_vector(3 downto 0); --firstDigit is the most significant digit in the hexadecimal number pair (bit 4 to 7), the first digit to be sent
   BEGIN
       IF curState=CONVERSION THEN
-      firstDigit := dataIn(7 downto 4);
-      secondDigit := dataIn(3 downto 0);
+      firstDigit := byte(7 downto 4);
+      secondDigit := byte(3 downto 0);
       CASE firstDigit IS
         WHEN "0000" => firstDigitASCII <= "00110000";
         WHEN "0001" => firstDigitASCII <= "00110001";
@@ -241,6 +281,7 @@ data_conversion:PROCESS(curState,dataIn)
         WHEN "1101" => firstDigitASCII <= "01000100";
         WHEN "1110" => firstDigitASCII <= "01000101";
         WHEN "1111" => firstDigitASCII <= "01000110";
+        WHEN OTHERS => firstDigitASCII <= "00100001"; --print "!" for any other combinations
       END CASE;
       
       CASE secondDigit IS
@@ -260,13 +301,14 @@ data_conversion:PROCESS(curState,dataIn)
         WHEN "1101" => secondDigitASCII <= "01000100";
         WHEN "1110" => secondDigitASCII <= "01000101";
         WHEN "1111" => secondDigitASCII <= "01000110";
+        WHEN OTHERS => secondDigitASCII <= "00100001"; --print "!" for any other combinations
       END CASE;
       
     ELSE 
-      firstDigit := TO_UNSIGNED(0,4);
-      secondDigit := TO_UNSIGNED(0,4);
-      firstDigitASCII <= TO_UNSIGNED(0,8);
-      secondDigitASCII <= TO_UNSIGNED(0,8);
+      firstDigit := "0000";
+      secondDigit := "0000";
+      firstDigitASCII <= "00000000";
+      secondDigitASCII <= "00000000";
     
     END IF;
   END PROCESS;
@@ -274,7 +316,7 @@ data_conversion:PROCESS(curState,dataIn)
 firstDigitRegister: PROCESS(resetRegister,clk)
   BEGIN
     IF resetRegister = '1' THEN
-      reg_firstDigitASCII <= TO_UNSIGNED(0,8);
+      reg_firstDigitASCII <= "00000000";
     ELSIF clk'event AND clk='1' THEN
       IF R1_en = '1' THEN
         reg_firstDigitASCII <= firstDigitASCII; 
@@ -282,13 +324,24 @@ firstDigitRegister: PROCESS(resetRegister,clk)
     END IF;
   END PROCESS;      
   
-secondDigitRegister: PROCESS(resetRegiser,clk)
+secondDigitRegister: PROCESS(resetRegister,clk)
   BEGIN
     IF resetRegister = '1' THEN
-      reg_secondDigitASCII <= TO_UNSIGNED(0,8);
+      reg_secondDigitASCII <= "00000000";
     ELSIF clk'event AND clk='1' THEN
       IF R2_en = '1' THEN
         reg_secondDigitASCII <= secondDigitASCII; 
+      END IF;
+    END IF;
+  END PROCESS;      
+  
+aNNN_valid_Register: PROCESS(reset_aNNN_valid,clk)  --this is to register the aNNN_valid signal when it goes high to prevent it from going undetected when the machine is echoing rxData as it is only checked in the INIT state
+  BEGIN
+    IF reset_aNNN_valid = '1' THEN
+      reg_aNNN_valid <= '0';
+    ELSIF clk'event AND clk='1' THEN
+      IF aNNN_valid = '1' THEN
+        reg_aNNN_valid <= '1'; 
       END IF;
     END IF;
   END PROCESS;      
@@ -310,7 +363,7 @@ seq_state : PROCESS(clk)  --sequential state updating
       curState <= nextState;
     END IF;
   END PROCESS;
-      
+END; --end architecture      
       
         
 
