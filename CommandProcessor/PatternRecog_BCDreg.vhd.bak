@@ -124,7 +124,9 @@ BEGIN
       WHEN done3 => 
         numWords_BCD <= BCD_array;
         rxDone <= '1';
-        start <= '1';
+        nextState <= send_valid;
+      
+      WHEN send_valid =>
         aNNN_valid <= '1';
         nextState <= IDLE;
 
