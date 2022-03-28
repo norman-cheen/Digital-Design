@@ -1,4 +1,3 @@
-
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned."+";
@@ -24,6 +23,7 @@ entity dataConsume is
 	);
 end dataConsume;
 
+
 ARCHITECTURE bahav of dataConsume is
   --------------Comparator-----------------------------------  
   component comparator is
@@ -41,7 +41,6 @@ ARCHITECTURE bahav of dataConsume is
   SIGNAL bcd_counter: BCD_ARRAY_TYPE(2 DOWNTO 0) := ("0000", "0000", "0000");
   SIGNAL array1: CHAR_ARRAY_TYPE(6 DOWNTO 0) := ("00000000","00000000","00000000","00000000","00000000","00000000","00000000");
   SIGNAL array2: CHAR_ARRAY_TYPE(6 DOWNTO 0) := ("00000000","00000000","00000000","00000000","00000000","00000000","00000000");
-  SIGNAL peakDetected: std_logic;
   SIGNAL dataThreshold: std_logic_vector(7 downto 0) := ("00000000");
   SIGNAL CtrlIn_Reg: std_logic;
   SIGNAL grtthan,equals: std_logic; 
@@ -54,9 +53,11 @@ ARCHITECTURE bahav of dataConsume is
   SIGNAL bcd_counter_en: std_logic;
   SIGNAL bcd_counter_reset: std_logic;
   SIGNAL shifter_en: std_logic;
+  SIGNAL array1_reset: std_logic;
   
 BEGIN
    ctrlOut <= ctrl_out_sig;
+   
 
   ---------Comparator Port Mapping ---------------------------------
   Comp1: comparator port map(data,dataThreshold,grtthan,equals);
@@ -99,12 +100,14 @@ BEGIN
   shifter: PROCESS (CLK)
     VARIABLE reg_shift : CHAR_ARRAY_TYPE(6 DOWNTO 0) := ("00000000","00000000","00000000","00000000","00000000","00000000","00000000");
   BEGIN
-    IF clk'EVENT AND clk='1' AND shifter_en='1' THEN
+    IF array1_reset = '1' THEN
+      reg_shift := ("00000000","00000000","00000000","00000000","00000000","00000000","00000000");
+    ELSIF clk'EVENT AND clk='1' AND shifter_en='1' THEN
       FOR i in 6 downto 1 LOOP
         reg_shift(i) := reg_shift(i-1);
       END LOOP;
-      reg_shift(0) := reg_data;  
-    ELSE NULL;
+      reg_shift(0) := reg_data;    
+    ELSE NULL;  
     END IF;
     
     array1 <= reg_shift;
@@ -115,11 +118,9 @@ BEGIN
   pendingResult: Process (CLK)
   BEGIN
     IF reset = '1' THEN 
-      array2 <= ("00000000","00000000","00000000","00000000","00000000","00000000","00000000");
-    ELSIF peakDetected = '1' THEN
-      IF dataThreshold = array1(3) THEN
+      array2 <= ("00000000","00000000","00000000","00000000","00000000","00000000","00000000");      
+    ELSIF dataThreshold = array1(3) THEN
         array2 <= array1;
-      END IF;
     END IF;
   END PROCESS; --pendingResult
   
@@ -179,15 +180,11 @@ BEGIN
           -- The receive data state from the dat generator 
           nextState <= third;
           
-   	when third =>
+       	when third => 
               if bcd_counter = numWords_bcd then 
-                nextState <= fourth;
+                  nextState <= fourth;
               else
-               if start = '1' then
-                  nextState <= second;
-                else
-                  nextState <= first;
-                end if; 
+                  nextState <= first; 
               end if;
               
         when fourth =>
@@ -202,8 +199,18 @@ BEGIN
     ----------Output State -------------------------------------------------   
       out_state: process(curState)
     begin
-   
-       if curState = second then 
+       if curState = init then 
+         bcd_counter_reset <= '1';
+         array1_reset <= '1';
+         seqDone <= '0';
+         maxIndex <= ("0000", "0000", "0000");
+        
+         
+       elsif curState = first then  
+         bcd_counter_reset <= '0';
+         array1_reset <= '0';
+        
+       elsif curState = second then 
          byte <= data; 
          dataReady <= '1'; 
          bcd_counter_en <='1';
@@ -212,11 +219,10 @@ BEGIN
          if grtthan = '1' then 
             dataThreshold <= data;
             max_index_sig <= bcd_counter;
-            peakdetected <= '1';
          else 
            dataThreshold <=  dataThreshold;  
            max_index_sig <= max_index_sig; 
-         end if;
+         end if; 
        elsif  curState = third then
            shifter_en <= '0';
            bcd_counter_en <= '0';
@@ -225,6 +231,7 @@ BEGIN
 		     maxIndex <= max_index_sig;
 		   elsif curState = fifth then
 		      seqDone <= '1';
+		      dataThreshold <= "00000000";
 		   end if; 
     end process;
   
