@@ -69,7 +69,7 @@ combi_nextState:PROCESS(curState,DataReady,txDone,rxDone,reg_aNNN_valid,Count)
           nextState <= INIT;
           
         WHEN CONVERSION =>
-          IF Count>=2 AND txDone = '1' THEN
+          IF Count>=1 AND txDone = '1' THEN
             nextState <= SEND_FIRST_DIGIT;
           ELSE
             nextState <= CONVERSION;
