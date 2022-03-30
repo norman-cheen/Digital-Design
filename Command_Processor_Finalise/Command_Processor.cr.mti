@@ -1,0 +1,192 @@
+{C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/Command_Proc_Main.vhd} {1 {vcom -work work -2002 -explicit -vopt {C:\Users\jm20101\OneDrive - University of Bristol\Digital_Design, Group_Project\Assignment_2\Command_Processor_Finalise\Command_Proc_Main.vhd}
+Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package common_pack
+-- Compiling entity cmdProc
+-- Compiling architecture arc of cmdProc
+-- Loading entity dataConversion
+-- Loading entity commandProc
+
+} {} {}} {C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/dataConsume_unsigned.vhdp} {1 {vcom -work work -2002 -explicit -vopt {C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/dataConsume_unsigned.vhdp}
+Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling package dataConsume_pack
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading package dataConsume_pack
+-- Loading package common_pack
+-- Compiling entity dataConsume
+
+} {} {}} {C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/tb_CmdProcessor.vhd} {1 {vcom -work work -2002 -explicit -vopt {C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/tb_CmdProcessor.vhd}
+Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package common_pack
+-- Compiling entity tb_cmdProc_interim
+-- Compiling architecture testbench of tb_cmdProc_interim
+
+} {} {}} {{C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/UART_RX_CTRL.vhd}} {1 {vcom -work work -2002 -explicit -vopt {C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/UART_RX_CTRL.vhd}
+Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity UART_RX_CTRL
+-- Compiling architecture RCVR of UART_RX_CTRL
+
+} {} {}} {{C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/tb_CmdProcessor.vhd}} {1 {vcom -work work -2002 -explicit -vopt {C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/tb_CmdProcessor.vhd}
+Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package common_pack
+-- Compiling entity tb_cmdProc_interim
+-- Compiling architecture testbench of tb_cmdProc_interim
+
+} {} {}} {C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/PatternRecog_BCD_Register.vhd} {1 {vcom -work work -2002 -explicit -vopt {C:\Users\jm20101\OneDrive - University of Bristol\Digital_Design, Group_Project\Assignment_2\Command_Processor_Finalise\PatternRecog_BCD_Register.vhd}
+Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package common_pack
+-- Compiling entity commandProc
+-- Compiling architecture ANNN of commandProc
+
+} {} {}} {{C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/UART_TX_CTRL.vhd}} {1 {vcom -work work -2002 -explicit -vopt {C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/UART_TX_CTRL.vhd}
+Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity UART_TX_CTRL
+-- Compiling architecture Behavioral of UART_TX_CTRL
+
+} {} {}} {C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/dataGen.vhd} {1 {vcom -work work -2002 -explicit -vopt {C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/dataGen.vhd}
+Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package common_pack
+-- Compiling entity dataGen
+-- Compiling architecture behav of dataGen
+
+} {} {}} {{C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/Command_Proc_Main.vhd}} {1 {vcom -work work -2002 -explicit -vopt {C:\Users\jm20101\OneDrive - University of Bristol\Digital_Design, Group_Project\Assignment_2\Command_Processor_Finalise\Command_Proc_Main.vhd}
+Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package common_pack
+-- Compiling entity cmdProc
+-- Compiling architecture arc of cmdProc
+-- Loading entity dataConversion
+-- Loading entity commandProc
+
+} {} {}} {C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/common_pack.vhd} {1 {vcom -work work -2002 -explicit -vopt {C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/common_pack.vhd}
+Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling package common_pack
+
+} {} {}} {{C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/common_pack.vhd}} {1 {vcom -work work -2002 -explicit -vopt {C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/common_pack.vhd}
+Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling package common_pack
+
+} {} {}} {{C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/dataConsume_unsigned.vhdp}} {1 {vcom -work work -2002 -explicit -vopt {C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/dataConsume_unsigned.vhdp}
+Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling package dataConsume_pack
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading package dataConsume_pack
+-- Loading package common_pack
+-- Compiling entity dataConsume
+
+} {} {}} {C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/comparator1.vhd} {1 {vcom -work work -2002 -explicit -vopt {C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/comparator1.vhd}
+Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading package common_pack
+-- Compiling entity comparator
+-- Compiling architecture unsigned_int of comparator
+
+} {} {}} {{C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/comparator1.vhd}} {1 {vcom -work work -2002 -explicit -vopt {C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/comparator1.vhd}
+Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading package common_pack
+-- Compiling entity comparator
+-- Compiling architecture unsigned_int of comparator
+
+} {} {}} {C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/UART_RX_CTRL.vhd} {1 {vcom -work work -2002 -explicit -vopt {C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/UART_RX_CTRL.vhd}
+Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity UART_RX_CTRL
+-- Compiling architecture RCVR of UART_RX_CTRL
+
+} {} {}} {{C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/PatternRecog_BCD_Register.vhd}} {1 {vcom -work work -2002 -explicit -vopt {C:\Users\jm20101\OneDrive - University of Bristol\Digital_Design, Group_Project\Assignment_2\Command_Processor_Finalise\PatternRecog_BCD_Register.vhd}
+Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package common_pack
+-- Compiling entity commandProc
+-- Compiling architecture ANNN of commandProc
+
+} {} {}} {C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/UART_TX_CTRL.vhd} {1 {vcom -work work -2002 -explicit -vopt {C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/UART_TX_CTRL.vhd}
+Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity UART_TX_CTRL
+-- Compiling architecture Behavioral of UART_TX_CTRL
+
+} {} {}} {{C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/dataGen.vhd}} {1 {vcom -work work -2002 -explicit -vopt {C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/dataGen.vhd}
+Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package common_pack
+-- Compiling entity dataGen
+-- Compiling architecture behav of dataGen
+
+} {} {}} {{C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/nibbleCounter.vhd}} {1 {vcom -work work -2002 -explicit -vopt {C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/nibbleCounter.vhd}
+Model Technology ModelSim SE-64 vcom 10.1b Compiler 2012.04 Apr 26 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity dataConversion
+-- Compiling architecture arc of dataConversion
+
+} {} {}}

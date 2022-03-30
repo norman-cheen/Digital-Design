@@ -1,0 +1,768 @@
+# Compile of PatternRecog_BCD_Register.vhd failed with 3 errors.
+# Compile of common_pack.vhd was successful.
+# Compile of PatternRecog_BCD_Register.vhd failed with 3 errors.
+# Compile of PatternRecog_BCD_Register.vhd was successful.
+# Compile of nibbleCounter(SAM).vhd was successful.
+# Compile of nibbleCounter(SAM).vhd was successful.
+# Compile of UART_RX_CTRL.vhd was successful.
+# Compile of UART_TX_CTRL.vhd was successful.
+# Compile of tb_CmdProcessor.vhd was successful.
+# Compile of common_pack.vhd was successful.
+# Compile of PatternRecog_BCD_Register.vhd was successful.
+# 6 compiles, 0 failed with no errors. 
+# Compile of UART_RX_CTRL.vhd was successful.
+# Compile of nibbleCounter(SAM).vhd was successful.
+# Compile of nibbleCounter.vhd was successful.
+# Compile of Command_Proc_Main.vhd failed with 5 errors.
+# Compile of Command_Proc_Main.vhd failed with 1 errors.
+# Compile of Command_Proc_Main.vhd failed with 7 errors.
+# Compile of Command_Proc_Main.vhd failed with 7 errors.
+# Compile of Command_Proc_Main.vhd failed with 7 errors.
+# Compile of Command_Proc_Main.vhd failed with 4 errors.
+# Compile of Command_Proc_Main.vhd failed with 1 errors.
+# Compile of Command_Proc_Main.vhd failed with 1 errors.
+# Compile of Command_Proc_Main.vhd failed with 1 errors.
+# Compile of Command_Proc_Main.vhd failed with 1 errors.
+# Compile of Command_Proc_Main.vhd failed with 1 errors.
+# Compile of PatternRecog_BCD_Register.vhd was successful.
+# Compile of Command_Proc_Main.vhd failed with 1 errors.
+# Compile of Command_Proc_Main.vhd failed with 1 errors.
+# Compile of PatternRecog_BCD_Register.vhd was successful.
+# Compile of PatternRecog_BCD_Register.vhd was successful.
+# Compile of Command_Proc_Main.vhd failed with 5 errors.
+# Compile of Command_Proc_Main.vhd failed with 3 errors.
+# Compile of Command_Proc_Main.vhd failed with 4 errors.
+# Compile of Command_Proc_Main.vhd failed with 2 errors.
+# Compile of Command_Proc_Main.vhd failed with 1 errors.
+# Compile of Command_Proc_Main.vhd failed with 1 errors.
+# Compile of Command_Proc_Main.vhd was successful.
+# Load canceled
+vsim -gui -novopt work.tb_cmdproc_interim(testbench)
+# vsim -gui -novopt work.tb_cmdproc_interim(testbench) 
+# Loading std.standard
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.tb_cmdproc_interim(testbench)
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.common_pack
+# Loading work.common_pack
+# Loading work.tb_cmdproc_interim(testbench)
+# ** Warning: (vsim-3473) Component instance "dataGen1 : dataGen" is not bound.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_cmdproc_interim File: C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/tb_CmdProcessor.vhd
+# ** Warning: (vsim-3473) Component instance "dataConsume1 : dataConsume" is not bound.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_cmdproc_interim File: C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/tb_CmdProcessor.vhd
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.cmdproc(arc)
+# Loading work.cmdproc(arc)
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.dataconversion(arc)
+# Loading work.dataconversion(arc)
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.commandproc(annn)
+# Loading work.commandproc(annn)
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.uart_tx_ctrl(behavioral)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading work.uart_tx_ctrl(behavioral)
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.uart_rx_ctrl(rcvr)
+# Loading work.uart_rx_ctrl(rcvr)
+add wave sim:/tb_cmdproc_interim/*
+run 200ms
+# Causality operation skipped due to absense of debug database file
+add wave -position end  sim:/tb_cmdproc_interim/cmdProc1/PatternRecog/aNNN_valid
+restart -force
+# ** Warning: (vsim-3473) Component instance "dataGen1 : dataGen" is not bound.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_cmdproc_interim File: C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/tb_CmdProcessor.vhd
+# ** Warning: (vsim-3473) Component instance "dataConsume1 : dataConsume" is not bound.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_cmdproc_interim File: C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/tb_CmdProcessor.vhd
+run 200ms
+add wave -position end  sim:/tb_cmdproc_interim/cmdProc1/nibbleCounter/aNNN_valid
+add wave -position end  sim:/tb_cmdproc_interim/cmdProc1/nibbleCounter/curState
+restart -force
+# ** Warning: (vsim-3473) Component instance "dataGen1 : dataGen" is not bound.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_cmdproc_interim File: C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/tb_CmdProcessor.vhd
+# ** Warning: (vsim-3473) Component instance "dataConsume1 : dataConsume" is not bound.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_cmdproc_interim File: C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/tb_CmdProcessor.vhd
+run 200ms
+add wave -position end  sim:/tb_cmdproc_interim/clk
+add wave -position end  sim:/tb_cmdproc_interim/cmdProc1/nibbleCounter/reg_aNNN_valid
+restart -force
+# ** Warning: (vsim-3473) Component instance "dataGen1 : dataGen" is not bound.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_cmdproc_interim File: C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/tb_CmdProcessor.vhd
+# ** Warning: (vsim-3473) Component instance "dataConsume1 : dataConsume" is not bound.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_cmdproc_interim File: C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/tb_CmdProcessor.vhd
+run 200ms
+# Compile of Command_Proc_Main.vhd was successful.
+# Compile of nibbleCounter.vhd was successful.
+quit -sim
+vsim -gui -novopt work.tb_cmdproc_interim(testbench)
+# vsim -gui -novopt work.tb_cmdproc_interim(testbench) 
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.common_pack
+# Loading work.tb_cmdproc_interim(testbench)
+# ** Warning: (vsim-3473) Component instance "dataGen1 : dataGen" is not bound.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_cmdproc_interim File: C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/tb_CmdProcessor.vhd
+# ** Warning: (vsim-3473) Component instance "dataConsume1 : dataConsume" is not bound.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_cmdproc_interim File: C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/tb_CmdProcessor.vhd
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.cmdproc(arc)
+# Loading work.cmdproc(arc)
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.dataconversion(arc)
+# Loading work.dataconversion(arc)
+# Loading work.commandproc(annn)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading work.uart_tx_ctrl(behavioral)
+# Loading work.uart_rx_ctrl(rcvr)
+add wave sim:/tb_cmdproc_interim/*
+add wave -position end  sim:/tb_cmdproc_interim/cmdProc1/nibbleCounter/curState
+add wave -position end  sim:/tb_cmdproc_interim/cmdProc1/nibbleCounter/aNNN_valid
+run 200ms
+add wave -position end  sim:/tb_cmdproc_interim/cmdProc1/PatternRecog/aNNN_valid
+# Compile of PatternRecog_BCD_Register.vhd failed with 2 errors.
+# Compile of PatternRecog_BCD_Register.vhd was successful.
+# Compile of Command_Proc_Main.vhd failed with 2 errors.
+# Compile of Command_Proc_Main.vhd was successful.
+restart -force
+# ** Warning: (vsim-3473) Component instance "dataGen1 : dataGen" is not bound.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_cmdproc_interim File: C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/tb_CmdProcessor.vhd
+# ** Warning: (vsim-3473) Component instance "dataConsume1 : dataConsume" is not bound.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_cmdproc_interim File: C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/tb_CmdProcessor.vhd
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.cmdproc(arc)
+# Loading work.cmdproc(arc)
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.commandproc(annn)
+# Loading work.commandproc(annn)
+run 200ms
+# ** Note: =====Process of Sequence No.1 starts.
+#    Time: 5832255 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Error: txData is 01000001; while byte(1) character(1) should be 00111001
+#    Time: 132991525 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Error: txData is 00110000; while byte(1) character(2) should be 00110101
+#    Time: 134190525 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.2 starts.
+#    Time: 137832255 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# Compile of dataConsume_unsigned.vhdp failed with 2 errors.
+quit -sim
+# Compile of UART_RX_CTRL.vhd was successful.
+# Compile of UART_TX_CTRL.vhd was successful.
+# Compile of tb_CmdProcessor.vhd was successful.
+# Compile of common_pack.vhd was successful.
+# Compile of PatternRecog_BCD_Register.vhd was successful.
+# Compile of Command_Proc_Main.vhd was successful.
+# Compile of nibbleCounter.vhd was successful.
+# Compile of dataConsume_unsigned.vhdp failed.
+# Compile of UART_RX_CTRL.vhd was successful.
+# Compile of UART_TX_CTRL.vhd was successful.
+# Compile of tb_CmdProcessor.vhd was successful.
+# Compile of common_pack.vhd was successful.
+# Compile of PatternRecog_BCD_Register.vhd was successful.
+# Compile of Command_Proc_Main.vhd was successful.
+# Compile of nibbleCounter.vhd was successful.
+# Compile of dataGen.vhd was successful.
+# Compile of dataConsume_unsigned.vhdp failed.
+# Compile of UART_RX_CTRL.vhd was successful.
+# Compile of UART_TX_CTRL.vhd was successful.
+# Compile of tb_CmdProcessor.vhd was successful.
+# Compile of common_pack.vhd was successful.
+# Compile of PatternRecog_BCD_Register.vhd was successful.
+# Compile of Command_Proc_Main.vhd was successful.
+# Compile of nibbleCounter.vhd was successful.
+# Compile of dataGen.vhd was successful.
+# Compile of comparator1.vhd was successful.
+# Compile of dataConsume_unsigned.vhdp was successful.
+# Compile of UART_RX_CTRL.vhd was successful.
+# Compile of UART_TX_CTRL.vhd was successful.
+# Compile of tb_CmdProcessor.vhd was successful.
+# Compile of common_pack.vhd was successful.
+# Compile of PatternRecog_BCD_Register.vhd was successful.
+# Compile of Command_Proc_Main.vhd was successful.
+# Compile of nibbleCounter.vhd was successful.
+# Compile of dataGen.vhd was successful.
+# Compile of comparator1.vhd was successful.
+# Compile of dataConsume_unsigned.vhdp was successful.
+# 10 compiles, 0 failed with no errors. 
+vsim -gui -novopt work.tb_cmdproc_interim(testbench)
+# vsim -gui -novopt work.tb_cmdproc_interim(testbench) 
+# Loading std.standard
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.tb_cmdproc_interim(testbench)
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.common_pack
+# Loading work.common_pack
+# Loading work.tb_cmdproc_interim(testbench)
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.datagen(behav)
+# Loading work.datagen(behav)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.dataconsume_pack
+# Loading work.dataconsume_pack
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.comparator(unsigned_int)
+# Loading work.comparator(unsigned_int)
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.cmdproc(arc)
+# Loading work.cmdproc(arc)
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.dataconversion(arc)
+# Loading work.dataconversion(arc)
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.commandproc(annn)
+# Loading work.commandproc(annn)
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.uart_tx_ctrl(behavioral)
+# Loading work.uart_tx_ctrl(behavioral)
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.uart_rx_ctrl(rcvr)
+# Loading work.uart_rx_ctrl(rcvr)
+run 200ms
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 1  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 1  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Note: =====Process of Sequence No.1 starts.
+#    Time: 5832255 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.1 is done.
+#    Time: 40209065 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 12 bytes has been processed; 
+#    Time: 40209065 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.2 starts.
+#    Time: 43334175 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.2 is done.
+#    Time: 77710985 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 12 bytes has been processed; 
+#    Time: 77710985 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.3 starts.
+#    Time: 80836095 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.3 is done.
+#    Time: 115212905 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 12 bytes has been processed; 
+#    Time: 115212905 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.4 starts.
+#    Time: 118338015 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.4 is done.
+#    Time: 155839985 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 13 bytes has been processed; 
+#    Time: 155839985 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Warning: numWords_BCD = 12 at the start of this sequence
+#    Time: 155839985 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.5 starts.
+#    Time: 158965095 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.5 is done.
+#    Time: 196467065 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 13 bytes has been processed; 
+#    Time: 196467065 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.6 starts.
+#    Time: 199592175 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+restart -force
+add wave sim:/tb_cmdproc_interim/*
+add wave -position end  sim:/tb_cmdproc_interim/cmdProc1/nibbleCounter/curState
+add wave -position end  sim:/tb_cmdproc_interim/cmdProc1/nibbleCounter/aNNN_valid
+run 200ms
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 1  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 1  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Note: =====Process of Sequence No.1 starts.
+#    Time: 5832255 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.1 is done.
+#    Time: 40209065 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 12 bytes has been processed; 
+#    Time: 40209065 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.2 starts.
+#    Time: 43334175 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.2 is done.
+#    Time: 77710985 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 12 bytes has been processed; 
+#    Time: 77710985 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.3 starts.
+#    Time: 80836095 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.3 is done.
+#    Time: 115212905 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 12 bytes has been processed; 
+#    Time: 115212905 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.4 starts.
+#    Time: 118338015 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.4 is done.
+#    Time: 155839985 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 13 bytes has been processed; 
+#    Time: 155839985 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Warning: numWords_BCD = 12 at the start of this sequence
+#    Time: 155839985 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.5 starts.
+#    Time: 158965095 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.5 is done.
+#    Time: 196467065 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 13 bytes has been processed; 
+#    Time: 196467065 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.6 starts.
+#    Time: 199592175 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+add wave -position end  sim:/tb_cmdproc_interim/cmdProc1/nibbleCounter/reg_firstDigitASCII
+add wave -position end  sim:/tb_cmdproc_interim/cmdProc1/nibbleCounter/reg_secondDigitASCII
+quit -sim
+# Compile of UART_RX_CTRL.vhd was successful.
+# Compile of UART_TX_CTRL.vhd was successful.
+# Compile of tb_CmdProcessor.vhd was successful.
+# Compile of common_pack.vhd was successful.
+# Compile of PatternRecog_BCD_Register.vhd was successful.
+# Compile of nibbleCounter.vhd was successful.
+# Compile of Command_Proc_Main.vhd was successful.
+# Compile of dataGen.vhd was successful.
+# Compile of comparator1.vhd was successful.
+# Compile of dataConsume_unsigned.vhdp was successful.
+# 10 compiles, 0 failed with no errors. 
+# Load canceled
+vsim -gui -novopt work.tb_cmdproc_interim
+# vsim -gui -novopt work.tb_cmdproc_interim 
+# Loading std.standard
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.tb_cmdproc_interim(testbench)
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.common_pack
+# Loading work.common_pack
+# Loading work.tb_cmdproc_interim(testbench)
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.datagen(behav)
+# Loading work.datagen(behav)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.dataconsume_pack
+# Loading work.dataconsume_pack
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.comparator(unsigned_int)
+# Loading work.comparator(unsigned_int)
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.cmdproc(arc)
+# Loading work.cmdproc(arc)
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.dataconversion(arc)
+# Loading work.dataconversion(arc)
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.commandproc(annn)
+# Loading work.commandproc(annn)
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.uart_tx_ctrl(behavioral)
+# Loading work.uart_tx_ctrl(behavioral)
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.uart_rx_ctrl(rcvr)
+# Loading work.uart_rx_ctrl(rcvr)
+add wave sim:/tb_cmdproc_interim/*
+run
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 1  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 1  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Note: =====Process of Sequence No.1 starts.
+#    Time: 5832255 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.1 is done.
+#    Time: 40209065 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 12 bytes has been processed; 
+#    Time: 40209065 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.2 starts.
+#    Time: 43334175 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.2 is done.
+#    Time: 77710985 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 12 bytes has been processed; 
+#    Time: 77710985 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.3 starts.
+#    Time: 80836095 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.3 is done.
+#    Time: 115212905 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 12 bytes has been processed; 
+#    Time: 115212905 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.4 starts.
+#    Time: 118338015 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.4 is done.
+#    Time: 155839985 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 13 bytes has been processed; 
+#    Time: 155839985 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Warning: numWords_BCD = 12 at the start of this sequence
+#    Time: 155839985 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.5 starts.
+#    Time: 158965095 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.5 is done.
+#    Time: 196467065 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 13 bytes has been processed; 
+#    Time: 196467065 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.6 starts.
+#    Time: 199592175 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# Compile of nibbleCounter.vhd was successful.
+restart
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.dataconversion(arc)
+# Loading work.dataconversion(arc)
+run
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 1  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 1  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Error: txData is 00110110; while byte(1) character(1) should be 00111001
+#    Time: 3125235 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Error: txData is 00110000; while byte(1) character(2) should be 00110101
+#    Time: 4166955 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Error: txData is 00110110; while byte(2) character(1) should be 00110001
+#    Time: 6250395 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Error: txData is 00111000; while byte(2) character(2) should be 00110011
+#    Time: 7292115 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Error: txData is 01000001; while byte(3) character(1) should be 00110110
+#    Time: 9375555 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Error: txData is 00111000; while byte(3) character(2) should be 00110000
+#    Time: 10417275 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Error: txData is 01000110; while byte(4) character(1) should be 00110000
+#    Time: 12500715 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Error: txData is 01000011; while byte(5) character(1) should be 00110110
+#    Time: 15625875 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Error: txData is 00110111; while byte(5) character(2) should be 00111000
+#    Time: 16667595 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.0 is done.
+#    Time: 17709415 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 12 bytes has been processed; 
+#    Time: 17709415 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Warning: numWords_BCD = 0 at the start of this sequence
+#    Time: 17709415 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Error: txData is 00110000; while byte(6) character(1) should be 01000001
+#    Time: 18751035 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Error: txData is 00110110; while byte(6) character(2) should be 00111000
+#    Time: 19792755 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.1 starts.
+#    Time: 20834485 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Error: txData is 00111000; while byte(7) character(1) should be 00111001
+#    Time: 21876195 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Error: txData is 00110011; while byte(8) character(1) should be 01000110
+#    Time: 25001355 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Error: txData is 00110000; while byte(9) character(2) should be 00110001
+#    Time: 29168235 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Error: txData is 01000101; while byte(10) character(1) should be 01000011
+#    Time: 31251675 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Error: txData is 01000010; while byte(10) character(2) should be 00110111
+#    Time: 32293395 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Error: txData is 00110100; while byte(11) character(1) should be 00111001
+#    Time: 34376835 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Error: txData is 00111001; while byte(11) character(2) should be 00110010
+#    Time: 35418555 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Error: txData is 00111000; while byte(12) character(1) should be 00110000
+#    Time: 37501995 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Error: txData is 00110000; while byte(12) character(2) should be 00110110
+#    Time: 38543715 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.1 is done.
+#    Time: 39585535 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 12 bytes has been processed; 
+#    Time: 39585535 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.2 starts.
+#    Time: 42710605 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.2 is done.
+#    Time: 64586775 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 12 bytes has been processed; 
+#    Time: 64586775 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.2 is done.
+#    Time: 83337735 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 12 bytes has been processed; 
+#    Time: 83337735 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Warning: numWords_BCD = 0 at the start of this sequence
+#    Time: 83337735 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.2 is done.
+#    Time: 105213855 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 12 bytes has been processed; 
+#    Time: 105213855 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Warning: numWords_BCD = 0 at the start of this sequence
+#    Time: 105213855 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.2 is done.
+#    Time: 123964855 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 12 bytes has been processed; 
+#    Time: 123964855 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Warning: numWords_BCD = 0 at the start of this sequence
+#    Time: 123964855 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.3 starts.
+#    Time: 127089925 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.3 is done.
+#    Time: 152091255 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 13 bytes has been processed; 
+#    Time: 152091255 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Warning: numWords_BCD = 12 at the start of this sequence
+#    Time: 152091255 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.3 is done.
+#    Time: 173967415 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 13 bytes has been processed; 
+#    Time: 173967415 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Warning: numWords_BCD = 0 at the start of this sequence
+#    Time: 173967415 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.4 starts.
+#    Time: 177092485 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.4 is done.
+#    Time: 198968655 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 13 bytes has been processed; 
+#    Time: 198968655 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# Compile of nibbleCounter.vhd was successful.
+restart
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.dataconversion(arc)
+# Loading work.dataconversion(arc)
+run
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 1  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 1  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Note: =====Process of Sequence No.1 starts.
+#    Time: 5832255 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.1 is done.
+#    Time: 40209065 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 12 bytes has been processed; 
+#    Time: 40209065 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.2 starts.
+#    Time: 43334175 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.2 is done.
+#    Time: 77710985 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 12 bytes has been processed; 
+#    Time: 77710985 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.3 starts.
+#    Time: 80836095 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.3 is done.
+#    Time: 115212905 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 12 bytes has been processed; 
+#    Time: 115212905 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.4 starts.
+#    Time: 118338015 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.4 is done.
+#    Time: 155839985 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 13 bytes has been processed; 
+#    Time: 155839985 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Warning: numWords_BCD = 12 at the start of this sequence
+#    Time: 155839985 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.5 starts.
+#    Time: 158965095 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.5 is done.
+#    Time: 196467065 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 13 bytes has been processed; 
+#    Time: 196467065 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.6 starts.
+#    Time: 199592175 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+quit -sim
+# Compile of nibbleCounter.vhd failed with 2 errors.
+# Compile of UART_RX_CTRL.vhd was successful.
+# Compile of UART_TX_CTRL.vhd was successful.
+# Compile of tb_CmdProcessor.vhd was successful.
+# Compile of common_pack.vhd was successful.
+# Compile of PatternRecog_BCD_Register.vhd was successful.
+# Compile of nibbleCounter.vhd failed with 2 errors.
+# Compile of Command_Proc_Main.vhd was successful.
+# Compile of dataGen.vhd was successful.
+# Compile of comparator1.vhd was successful.
+# Compile of dataConsume_unsigned.vhdp was successful.
+# 10 compiles, 1 failed with 2 errors. 
+vsim -gui -novopt work.tb_cmdproc_interim(testbench)
+# vsim -gui -novopt work.tb_cmdproc_interim(testbench) 
+# Loading std.standard
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.tb_cmdproc_interim(testbench)
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.common_pack
+# Loading work.common_pack
+# Loading work.tb_cmdproc_interim(testbench)
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.datagen(behav)
+# Loading work.datagen(behav)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.dataconsume_pack
+# Loading work.dataconsume_pack
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.comparator(unsigned_int)
+# Loading work.comparator(unsigned_int)
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.cmdproc(arc)
+# Loading work.cmdproc(arc)
+# Loading work.dataconversion(arc)
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.commandproc(annn)
+# Loading work.commandproc(annn)
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.uart_tx_ctrl(behavioral)
+# Loading work.uart_tx_ctrl(behavioral)
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.uart_rx_ctrl(rcvr)
+# Loading work.uart_rx_ctrl(rcvr)
+add wave sim:/tb_cmdproc_interim/*
+add wave -position end  sim:/tb_cmdproc_interim/cmdProc1/nibbleCounter/curState
+add wave -position end  sim:/tb_cmdproc_interim/cmdProc1/nibbleCounter/aNNN_valid
+add wave -position end  sim:/tb_cmdproc_interim/cmdProc1/PatternRecog/curState
+run 200ms
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 1  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 1  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Note: =====Process of Sequence No.1 starts.
+#    Time: 5832255 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.1 is done.
+#    Time: 40209065 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 12 bytes has been processed; 
+#    Time: 40209065 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.2 starts.
+#    Time: 43334175 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.2 is done.
+#    Time: 77710985 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 12 bytes has been processed; 
+#    Time: 77710985 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.3 starts.
+#    Time: 80836095 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.3 is done.
+#    Time: 115212905 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 12 bytes has been processed; 
+#    Time: 115212905 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.4 starts.
+#    Time: 118338015 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.4 is done.
+#    Time: 155839985 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 13 bytes has been processed; 
+#    Time: 155839985 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Warning: numWords_BCD = 12 at the start of this sequence
+#    Time: 155839985 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.5 starts.
+#    Time: 158965095 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.5 is done.
+#    Time: 196467065 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 13 bytes has been processed; 
+#    Time: 196467065 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.6 starts.
+#    Time: 199592175 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# Compile of nibbleCounter.vhd was successful.
+restart -force
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.dataconversion(arc)
+# Loading work.dataconversion(arc)
+run 200ms
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 1  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 1  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Note: =====Process of Sequence No.1 starts.
+#    Time: 5832255 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.1 is done.
+#    Time: 40209065 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 12 bytes has been processed; 
+#    Time: 40209065 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.2 starts.
+#    Time: 43334175 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.2 is done.
+#    Time: 77710985 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 12 bytes has been processed; 
+#    Time: 77710985 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.3 starts.
+#    Time: 80836095 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.3 is done.
+#    Time: 115212905 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 12 bytes has been processed; 
+#    Time: 115212905 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.4 starts.
+#    Time: 118338015 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.4 is done.
+#    Time: 155839985 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 13 bytes has been processed; 
+#    Time: 155839985 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Warning: numWords_BCD = 12 at the start of this sequence
+#    Time: 155839985 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.5 starts.
+#    Time: 158965095 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.5 is done.
+#    Time: 196467065 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 13 bytes has been processed; 
+#    Time: 196467065 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.6 starts.
+#    Time: 199592175 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+add wave -position end  sim:/tb_cmdproc_interim/cmdProc1/nibbleCounter/start
+# Compile of nibbleCounter.vhd was successful.
+# Compile of nibbleCounter.vhd was successful.
+# Compile of nibbleCounter.vhd was successful.
+restart -force
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.dataconversion(arc)
+# Loading work.dataconversion(arc)
+add wave -position end  sim:/tb_cmdproc_interim/cmdProc1/nibbleCounter/seqDone_int
+run 200ms
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 1  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 1  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Note: =====Process of Sequence No.1 starts.
+#    Time: 5832255 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.1 is done.
+#    Time: 40209065 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 12 bytes has been processed; 
+#    Time: 40209065 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.2 starts.
+#    Time: 137832255 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.2 is done.
+#    Time: 175334225 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 13 bytes has been processed; 
+#    Time: 175334225 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# Compile of nibbleCounter.vhd was successful.
+restart -force
+# Refreshing C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/work.dataconversion(arc)
+# Loading work.dataconversion(arc)
+run 200ms
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 0  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 1  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 0 ns  Iteration: 1  Protected: /tb_cmdproc_interim/dataConsume1/<protected>
+# ** Note: =====Process of Sequence No.1 starts.
+#    Time: 5832255 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.1 is done.
+#    Time: 40209065 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 12 bytes has been processed; 
+#    Time: 40209065 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.2 starts.
+#    Time: 137832255 ns  Iteration: 2  Instance: /tb_cmdproc_interim
+# ** Note: =====Process of Sequence No.2 is done.
+#    Time: 175334225 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+# ** Note: =====A total of 13 bytes has been processed; 
+#    Time: 175334225 ns  Iteration: 3  Instance: /tb_cmdproc_interim
+quit -sim

@@ -1,0 +1,422 @@
+m255
+K3
+13
+cModel Technology
+dC:\Users\jm20101\OneDrive - University of Bristol\Digital_Design, Group_Project\Assignment_2\Command_Processor_Local
+Ecmdproc
+Z0 w1648643423
+Z1 DPx4 work 11 common_pack 0 22 LLGbjJTL0=1F=Q>9X4ENT3
+Z2 DPx4 ieee 11 numeric_std 0 22 O3PF8EB`?j9=z7KT`fn941
+Z3 DPx3 std 6 textio 0 22 5>J:;AW>W0[[dW0I6EN1Q0
+Z4 DPx4 ieee 14 std_logic_1164 0 22 5=aWaoGZSMWIcH0i^f`XF1
+Z5 dC:\Users\jm20101\OneDrive - University of Bristol\Digital_Design, Group_Project\Assignment_2\Command_Processor_Finalise
+Z6 8C:\Users\jm20101\OneDrive - University of Bristol\Digital_Design, Group_Project\Assignment_2\Command_Processor_Finalise\Command_Proc_Main.vhd
+Z7 FC:\Users\jm20101\OneDrive - University of Bristol\Digital_Design, Group_Project\Assignment_2\Command_Processor_Finalise\Command_Proc_Main.vhd
+l0
+L6
+VWE1?z]>@^>JP:;:A?eID?2
+Z8 OL;C;10.1b;51
+32
+Z9 !s108 1648646302.793000
+Z10 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|C:\Users\jm20101\OneDrive - University of Bristol\Digital_Design, Group_Project\Assignment_2\Command_Processor_Finalise\Command_Proc_Main.vhd|
+Z11 !s107 C:\Users\jm20101\OneDrive - University of Bristol\Digital_Design, Group_Project\Assignment_2\Command_Processor_Finalise\Command_Proc_Main.vhd|
+Z12 o-work work -2002 -explicit
+Z13 tExplicit 1
+!s100 ]9]PCYV9b=BV=Y6G]0Ogi1
+!i10b 1
+Aarc
+Z14 DEx4 work 11 commandproc 0 22 7X6fBgd?ce@eiN@N8[_Ym2
+Z15 DEx4 work 14 dataconversion 0 22 kR:GX=3e>j]6n5P`<bXNh2
+R1
+R2
+R3
+R4
+DEx4 work 7 cmdproc 0 22 WE1?z]>@^>JP:;:A?eID?2
+32
+l64
+L28
+VJz1U69dIYNaVDj1VGHzkl1
+R8
+R9
+R10
+R11
+R12
+R13
+!i10b 1
+!s100 QXmoRJo:T5C@NAg3@N?kA0
+Ecommandproc
+Z16 w1648643365
+R1
+R2
+R3
+R4
+R5
+Z17 8C:\Users\jm20101\OneDrive - University of Bristol\Digital_Design, Group_Project\Assignment_2\Command_Processor_Finalise\PatternRecog_BCD_Register.vhd
+Z18 FC:\Users\jm20101\OneDrive - University of Bristol\Digital_Design, Group_Project\Assignment_2\Command_Processor_Finalise\PatternRecog_BCD_Register.vhd
+l0
+L6
+V7X6fBgd?ce@eiN@N8[_Ym2
+R8
+32
+Z19 !s108 1648646302.652000
+Z20 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|C:\Users\jm20101\OneDrive - University of Bristol\Digital_Design, Group_Project\Assignment_2\Command_Processor_Finalise\PatternRecog_BCD_Register.vhd|
+Z21 !s107 C:\Users\jm20101\OneDrive - University of Bristol\Digital_Design, Group_Project\Assignment_2\Command_Processor_Finalise\PatternRecog_BCD_Register.vhd|
+R12
+R13
+!s100 U1W7Og36b4_JH=`icBobn2
+!i10b 1
+Aannn
+R1
+R2
+R3
+R4
+R14
+32
+l43
+L19
+V7Rmd?S1`=8j;3EIhmfO793
+R8
+R19
+R20
+R21
+R12
+R13
+!i10b 1
+!s100 _cHlNZcX@ai`F^:6ndAgL3
+Aaannn
+R1
+R2
+R3
+R4
+DEx4 work 11 commandproc 0 22 R<6mYn5?eLdmeBf8jiZbj0
+l43
+L19
+V6lTNE6OaLV`4VB:0>@Qo43
+R8
+32
+R12
+R13
+w1648636574
+FC:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/PatternRecog_BCD_Register.vhd
+8C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/PatternRecog_BCD_Register.vhd
+!s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/PatternRecog_BCD_Register.vhd|
+!s107 C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/PatternRecog_BCD_Register.vhd|
+!s108 1648636697.577000
+!s100 bTHc<I]V1o]Eb6YV_`8oB2
+!i10b 1
+Pcommon_pack
+R3
+R4
+32
+w1391799820
+R5
+8C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/common_pack.vhd
+FC:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/common_pack.vhd
+l0
+L4
+VLLGbjJTL0=1F=Q>9X4ENT3
+R8
+R12
+R13
+!i10b 1
+!s100 YDXCjJYFPXaAT^U6RRbU<1
+!s108 1648646302.589000
+!s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/common_pack.vhd|
+!s107 C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/common_pack.vhd|
+Ecomparator
+Z22 w1366129607
+R1
+Z23 DPx4 ieee 15 std_logic_arith 0 22 4`Y?g_lkdn;7UL9IiJck01
+Z24 DPx4 ieee 18 std_logic_unsigned 0 22 RYmj;=TK`k=k>D@Cz`zoB3
+R3
+R4
+R5
+Z25 8C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/comparator1.vhd
+Z26 FC:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/comparator1.vhd
+l0
+L7
+VcVilb`Zn_<FYe9MJ2C;1P0
+R8
+32
+Z27 !s108 1648646302.923000
+Z28 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/comparator1.vhd|
+Z29 !s107 C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/comparator1.vhd|
+R12
+R13
+!s100 Hb7H[Aa@[2f8R3Rb]LDeG3
+!i10b 1
+Aunsigned_int
+R1
+R23
+R24
+R3
+R4
+Z30 DEx4 work 10 comparator 0 22 cVilb`Zn_<FYe9MJ2C;1P0
+32
+l17
+L16
+VHY0OSXT<ZjAb?kaKVHQ:?0
+R8
+R27
+R28
+R29
+R12
+R13
+!i10b 1
+!s100 92EECdjN:W[;[7lEf8Mz`1
+Edataconsume
+Z31 w1613493186
+R1
+Z32 DPx4 work 16 dataconsume_pack 0 22 nHf7KMJjMeCnKHm1^Ie:=3
+R23
+R24
+R3
+R4
+R5
+Z33 8C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/dataConsume_unsigned.vhdp
+Z34 FC:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/dataConsume_unsigned.vhdp
+l0
+L25
+Vc53DFj5ifH:J;DhNUB9P^2
+R8
+32
+Z35 !s108 1648646302.997000
+Z36 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/dataConsume_unsigned.vhdp|
+Z37 !s107 C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/dataConsume_unsigned.vhdp|
+R12
+R13
+!s100 BWX4R0K]FP5KzVH?lFI_n2
+!i10b 1
+Ayz6X0MRe43iQsQxkEvJeLQ==
+R30
+R1
+R32
+R23
+R24
+R3
+R4
+DEx4 work 11 dataconsume 0 22 c53DFj5ifH:J;DhNUB9P^2
+32
+l43
+L2
+VloG<URcTCi;J9B[gGon773
+R8
+R35
+R36
+R37
+R12
+R13
+n68be86
+!i10b 1
+!s100 C5Io[T7eJSbRl=?N@l1:g1
+!i8a 947093680
+Pdataconsume_pack
+R3
+R4
+32
+R31
+R5
+R33
+R34
+l0
+L4
+VnHf7KMJjMeCnKHm1^Ie:=3
+R8
+R35
+R36
+R37
+R12
+R13
+!i10b 1
+!s100 o;fCTeZhzLzDlFNY8PWPf0
+Edataconversion
+Z38 w1648652533
+R2
+R3
+R4
+R5
+Z39 8C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/nibbleCounter.vhd
+Z40 FC:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/nibbleCounter.vhd
+l0
+L5
+VkR:GX=3e>j]6n5P`<bXNh2
+R8
+32
+Z41 !s108 1648652539.482000
+Z42 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/nibbleCounter.vhd|
+Z43 !s107 C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/nibbleCounter.vhd|
+R12
+R13
+!s100 BQW?k@844E66lM@7RBHU72
+!i10b 1
+Aarc
+R2
+R3
+R4
+R15
+32
+!i10b 1
+l31
+L22
+VV4>SOaWWendYTc2Ldjg3O0
+R8
+R41
+R42
+R43
+R12
+R13
+!s100 >84@kgFY`Y1h_WYQd?bTh2
+Edatagen
+Z44 w1366105592
+R1
+R3
+R4
+R5
+Z45 8C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/dataGen.vhd
+Z46 FC:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/dataGen.vhd
+l0
+L5
+VJVamX@:1GQ_IV9[`IJNJM0
+R8
+32
+Z47 !s108 1648646302.855000
+Z48 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/dataGen.vhd|
+Z49 !s107 C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/dataGen.vhd|
+R12
+R13
+!s100 lLE?nm`Ofa1FcE6ig29ES1
+!i10b 1
+Abehav
+R1
+R3
+R4
+DEx4 work 7 datagen 0 22 JVamX@:1GQ_IV9[`IJNJM0
+32
+l19
+L15
+VTG_3k8NT<@]9ZMl8?DT2m3
+R8
+R47
+R48
+R49
+R12
+R13
+!i10b 1
+!s100 N:o33JeO^j6G^QHV[=jWD2
+Etb_cmdproc_interim
+Z50 w1616503914
+R1
+R2
+R3
+R4
+R5
+Z51 8C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/tb_CmdProcessor.vhd
+Z52 FC:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/tb_CmdProcessor.vhd
+l0
+L49
+VM3]jeK[4J=7YUU0B<E4_Z0
+R8
+32
+Z53 !s108 1648646302.523000
+Z54 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/tb_CmdProcessor.vhd|
+Z55 !s107 C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/tb_CmdProcessor.vhd|
+R12
+R13
+!s100 Hz58Gcg9l:=72<`=:CWL_1
+!i10b 1
+Atestbench
+R1
+R2
+R3
+R4
+DEx4 work 18 tb_cmdproc_interim 0 22 M3]jeK[4J=7YUU0B<E4_Z0
+32
+l179
+L52
+V^?eYb10Z`zb@:=0EL;aC13
+R8
+R53
+R54
+R55
+R12
+R13
+!i10b 1
+!s100 RPlWa9bBmch^9HA6D<>jV2
+Euart_rx_ctrl
+Z56 w1616502098
+R23
+R24
+R3
+R4
+R5
+Z57 8C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/UART_RX_CTRL.vhd
+Z58 FC:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/UART_RX_CTRL.vhd
+l0
+L70
+VP0m8G0^T:SG^;H7e7O5422
+R8
+32
+Z59 !s108 1648646302.383000
+Z60 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/UART_RX_CTRL.vhd|
+Z61 !s107 C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/UART_RX_CTRL.vhd|
+R12
+R13
+!s100 idQ2@T=X?^aFBa3JaanEP0
+!i10b 1
+Arcvr
+R23
+R24
+R3
+R4
+DEx4 work 12 uart_rx_ctrl 0 22 P0m8G0^T:SG^;H7e7O5422
+32
+l105
+L84
+V11DnNadEB8o3@hjNSFX;`1
+R8
+R59
+R60
+R61
+R12
+R13
+!i10b 1
+!s100 Do:kMCo3zVW2SURaVcoLk3
+Euart_tx_ctrl
+Z62 w1395830124
+R23
+R24
+R3
+R4
+R5
+Z63 8C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/UART_TX_CTRL.vhd
+Z64 FC:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/UART_TX_CTRL.vhd
+l0
+L42
+VgXF=cSGRcDgMPSI;ILeeU2
+R8
+32
+Z65 !s108 1648646302.461000
+Z66 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/UART_TX_CTRL.vhd|
+Z67 !s107 C:/Users/jm20101/OneDrive - University of Bristol/Digital_Design, Group_Project/Assignment_2/Command_Processor_Finalise/UART_TX_CTRL.vhd|
+R12
+R13
+!s100 z[0ThedAWV4CK@o06R42Z1
+!i10b 1
+Abehavioral
+R23
+R24
+R3
+R4
+DEx4 work 12 uart_tx_ctrl 0 22 gXF=cSGRcDgMPSI;ILeeU2
+32
+l76
+L50
+VLFkHhlkz3[BZ6dQ90;XG[2
+R8
+R65
+R66
+R67
+R12
+R13
+!i10b 1
+!s100 H8X1C0<:Ro6A21=?kdLZ00
