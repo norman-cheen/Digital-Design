@@ -31,7 +31,7 @@ ARCHITECTURE aANNN of commandProc IS
       );
     END COMPONENT;
 
-    TYPE state_type IS (IDLE, READ_A_a, READ_N1, READ_N2, READ_N3, done1, done2, done3);
+    TYPE state_type IS (IDLE, READ_A_a, READ_N1, READ_N2, READ_N3, done1, done2, done3,send_valid);
     SIGNAL curState, nextState: state_type;
     SIGNAL aNNN_valid : std_logic;
     
