@@ -3,7 +3,6 @@ use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned."+";
 use ieee.std_logic_unsigned."-";
 use ieee.std_logic_unsigned."=";
---use work.dataConsume_pack.all;
 use work.common_pack.all;
 
 entity dataConsume is
@@ -24,7 +23,7 @@ entity dataConsume is
 end dataConsume;
 
 
-ARCHITECTURE bahav of dataConsume is
+ARCHITECTURE bahav OF dataConsume IS
   --------------Comparator-----------------------------------  
   component comparator is
 	  port (
@@ -34,35 +33,38 @@ ARCHITECTURE bahav of dataConsume is
 		   equal: out std_logic
 	     );
     end component;
+  -----------------------------------------------------------
   
-  TYPE state_type IS (init,first,second,third,fourth,fifth,wait_state); 
+  TYPE state_type IS (init,first,second,third,wait_state,fourth,fifth); 
   SIGNAL curState, nextState: state_type; 
   
-  SIGNAL bcd_counter: BCD_ARRAY_TYPE(2 DOWNTO 0) := ("0000", "0000", "0000");
-  SIGNAL array1: CHAR_ARRAY_TYPE(6 DOWNTO 0) := ("00000000","00000000","00000000","00000000","00000000","00000000","00000000");
-  SIGNAL array2: CHAR_ARRAY_TYPE(6 DOWNTO 0) := ("00000000","00000000","00000000","00000000","00000000","00000000","00000000");
-  SIGNAL array3: CHAR_ARRAY_TYPE(6 DOWNTO 0) := ("00000000","00000000","00000000","00000000","00000000","00000000","00000000");
-  SIGNAL dataThreshold: std_logic_vector(7 downto 0) := ("00000000");
-  SIGNAL CtrlIn_Reg: std_logic;
-  SIGNAL grtthan,equals: std_logic; 
-  SIGNAL max_index_sig: BCD_ARRAY_TYPE(2 DOWNTO 0);
   
-  SIGNAL reg_data: std_logic_vector(7 downto 0); -- data from datagen has to be registered
-  SIGNAL ctrl_out_sig: std_logic := '0';
+  SIGNAL bcd_counter      : BCD_ARRAY_TYPE(2 DOWNTO 0) := ("0000", "0000", "0000");
+  SIGNAL array1           : CHAR_ARRAY_TYPE(6 DOWNTO 0) := ("00000000","00000000","00000000","00000000","00000000","00000000","00000000");
+  SIGNAL array2           : CHAR_ARRAY_TYPE(6 DOWNTO 0) := ("00000000","00000000","00000000","00000000","00000000","00000000","00000000");
+  SIGNAL array3           : CHAR_ARRAY_TYPE(6 DOWNTO 0) := ("00000000","00000000","00000000","00000000","00000000","00000000","00000000");
+  SIGNAL dataThreshold    : std_logic_vector(7 DOWNTO 0) := ("00000000");
+  SIGNAL CtrlIn_Reg       : std_logic;
+  SIGNAL grtthan,equals   : std_logic; 
+  SIGNAL max_index_sig    : BCD_ARRAY_TYPE(2 DOWNTO 0);
   
+  -- Registers:
+  SIGNAL reg_data         : std_logic_vector(7 DOWNTO 0); 
+  SIGNAL ctrl_out_sig     : std_logic := '0';
   
-  SIGNAL bcd_counter_en: std_logic;
+  -- Enables and Resets:
+  SIGNAL bcd_counter_en   : std_logic;
   SIGNAL bcd_counter_reset: std_logic;
-  SIGNAL shifter_en: std_logic;
-  SIGNAL array1_reset: std_logic;
+  SIGNAL shifter_en       : std_logic;
+  SIGNAL array1_reset     : std_logic;
   
 BEGIN
   
-  ctrlOut <= ctrl_out_sig;
+  ----------register for the two-phase protocol---------------------
+  ctrlOut <= ctrl_out_sig; 
   
-  ---------Comparator Port Mapping ---------------------------------
-  Comp1: comparator port map(data,dataThreshold,grtthan,equals);
-    
+  ----------Comparator Port Mapping ---------------------------------
+  Comp1: comparator port map(data,dataThreshold,grtthan,equals);  
   
   ----------BCD counter----------------------------------------------
   bcdCounter: PROCESS (clk, reset)
@@ -86,7 +88,6 @@ BEGIN
           digit10  := "0000";          --if count >=90, carry out
           digit100 := digit100 + 1;
         END IF;
-      
       END IF;
       
       bcd_counter(0) <= digit1;
@@ -94,10 +95,9 @@ BEGIN
       bcd_counter(2) <= digit100;
       
     END IF;
-      
   END PROCESS;  --counter_bcd
   
-  ---------Shifter--------------------------------------------------
+  ----------Shifter--------------------------------------------------
   shifter: PROCESS (CLK)
     VARIABLE reg_shift : CHAR_ARRAY_TYPE(6 DOWNTO 0) := ("00000000","00000000","00000000","00000000","00000000","00000000","00000000");
   BEGIN
@@ -116,138 +116,141 @@ BEGIN
   END PROCESS; -- shifter
   
   ----------pendingResult-----------------------------------------
-  pendingResult: Process (CLK)
+  pendingResult: PROCESS (CLK)
   BEGIN
     IF reset = '1' THEN 
-      array2 <= ("00000000","00000000","00000000","00000000","00000000","00000000","00000000");      
+      array2 <= ("00000000","00000000","00000000","00000000","00000000","00000000","00000000");
+    
+    -- copy the elements in array1 into array2 when the peak byte is at the middle of array1:        
     ELSIF dataThreshold = array1(3) THEN
         array2 <= array1;
-        FOR i in  0 to 6 LOOP
+        
+        -- invert the sequence of the elements in array2 to array3
+        -- to match the test bench hence resolving the timing error arrised
+        -- array3 will be the "pending result" and will be sent to the command processor
+        -- alongside with the dataReady signal  
+        FOR i in  0 to 6 LOOP               
             array3(i) <= array2 (6-i);
         END LOOP;        
     END IF;
-  END PROCESS; --pendingResult
+  END PROCESS; -- pendingResult
   
-
-  
-  
-    ----------Two Phase Protocol----------------------------------------------  
- Two_phase_protocol: process(curState)   
- Begin
-    if curState = first then
-        ctrl_out_sig <= not ctrl_out_sig;
-    else
+ ----------Two Phase Protocol----------------------------------------------  
+ Two_phase_protocol: PROCESS(curState)   
+ BEGIN
+    IF curState = first THEN
+        ctrl_out_sig <= NOT ctrl_out_sig;
+    ELSE
         ctrl_out_sig <= ctrl_out_sig;
-    end if;
-  end process;
+    END IF;
+  END PROCESS;
 
- Reg_Ctrl_in :process(clk)
+ Reg_Ctrl_in : PROCESS(clk)
     BEGIN 
-    if rising_edge(clk) then
+    IF rising_edge(clk) THEN
        CtrlIn_Reg <= ctrlIn;
-    end if;
+    END IF;
     END PROCESS;
   
-  ----------Next State Clock----------------------------------------------     
-  next_state_clk: process(clk,reset)
+  -----------Next State Clock----------------------------------------------     
+  next_state_clk: PROCESS(clk,reset)
      BEGIN 
-       if reset = '1' then 
+       IF reset = '1' THEN 
          curState <= init;
-       elsif clk'event and clk ='1' then
+       ELSIF clk'event AND clk ='1' THEN
          curState <= nextState;
-       end if; 
-      end process;  
+       END IF; 
+      END PROCESS;  
   
-   ----------Next State Logic----------------------------------------------
-  next_state_logic: Process(curState,start,bcd_counter,ctrlIn)
+  -----------Next State Logic----------------------------------------------
+  next_state_logic: PROCESS(curState,start,bcd_counter,ctrlIn)
     BEGIN
-      Case curState is 
-        when init =>
-          -- This is the initial state where the Comand Processor has its first contact with  the Data Processor
-          -- The start signal lets the dataprocessor when to strat the transition.
-            if start = '1' then
+      CASE curState IS 
+        WHEN init =>
+          -- This is the initial state where the Comand Processor has its first contact with the Data Processor
+          -- The start signal lets the dataprocessor when to start the transition.
+            IF start = '1' THEN
               nextState <= first;
-            else 
+            ELSE 
               nextState <= init;
-            end if;   
+            END IF;   
             
-        when first =>
+        WHEN first =>
           -- This state checks if there is a transition and the setting of a transition in the value of the ctrl signal. 
           
-          if (CtrlIn_Reg xor ctrlIn) = '0' then
+          IF (CtrlIn_Reg XOR ctrlIn) = '0' THEN
              nextState <= first;
-          else
+          ELSE
              nextState <= second;   
-          end if;  
+          END IF;  
           
-        when second =>
+        WHEN second =>
           -- The receive data state from the dat generator 
           nextState <= third;
         
-       	when third => 
-              if bcd_counter = numWords_bcd then 
+       	WHEN third => 
+              IF bcd_counter = numWords_bcd THEN 
                   nextState <= fourth;
-              else
+              ELSE
                   nextState <= wait_state; 
-              end if;
+              END IF;
               
-        when wait_state =>
-          if start = '1' then
+        WHEN wait_state =>
+          IF start = '1' THEN
               nextState <= first;
-          else 
+          ELSE 
               nextState <= wait_state;
-          end if;
+          END IF;
               
-        when fourth =>
+        WHEN fourth =>
                nextState <= fifth;
                          
-        when fifth =>
+        WHEN fifth =>
               nextState <= init;	      
-      end case;
-      end process;
+      END CASE;
+      END PROCESS;
       
-  
     ----------Output State -------------------------------------------------   
-      out_state: process(curState)
-    begin
-       if curState = init then 
+      out_state: PROCESS(curState)
+    BEGIN
+       IF curState = init THEN 
          bcd_counter_reset <= '1';
          array1_reset <= '1';
          seqDone <= '0';
          maxIndex <= ("0000", "0000", "0000");
          
          
-       elsif curState = first then  
+       ELSIF curState = first THEN  
          bcd_counter_reset <= '0';
          array1_reset <= '0';
         
-       elsif curState = second then 
+       ELSIF curState = second THEN 
          byte <= data; 
          dataReady <= '1'; 
          bcd_counter_en <='1';
          shifter_en <= '1';
          reg_data <= data;
-         if grtthan = '1' then 
+         IF grtthan = '1' THEN 
             dataThreshold <= data;
             max_index_sig <= bcd_counter;
-         else 
+         ELSE 
            dataThreshold <=  dataThreshold;  
            max_index_sig <= max_index_sig; 
-         end if; 
-       elsif  curState = third then
+         END IF; 
+         
+       ELSIF  curState = third THEN
            shifter_en <= '0';
            bcd_counter_en <= '0';
            dataReady <= '0';
-		   elsif curState = fourth then
-		    ---------------Array Flipping-------------------------------------------------------
+           
+		   ELSIF curState = fourth THEN
 		     dataResults <= array3;
 		     maxIndex <= max_index_sig;
-		   elsif curState = fifth then
+		     
+		   ELSIF curState = fifth THEN
 		      seqDone <= '1';
 		      dataThreshold <= "00000000";
-		   end if; 
-    end process;
-  
-  
+		   END IF; 
+    END PROCESS;    
   
 END; -- end architecture
