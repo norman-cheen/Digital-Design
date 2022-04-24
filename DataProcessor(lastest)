@@ -60,7 +60,7 @@ ARCHITECTURE bahav OF dataConsume IS
   
 BEGIN
   
-  ----------register for the two-phase protocol---------------------
+  ----------two-phase protocol signal assignment---------------------
   ctrlOut <= ctrl_out_sig; 
   
   ----------Comparator Port Mapping ---------------------------------
@@ -144,7 +144,7 @@ BEGIN
         ctrl_out_sig <= ctrl_out_sig;
     END IF;
   END PROCESS;
-
+----------register for the Two Phase Protocol------------------------------ 
  Reg_Ctrl_in : PROCESS(clk)
     BEGIN 
     IF rising_edge(clk) THEN
@@ -152,7 +152,7 @@ BEGIN
     END IF;
     END PROCESS;
   
-  -----------Next State Clock----------------------------------------------     
+  -----------State Register----------------------------------------------     
   next_state_clk: PROCESS(clk,reset)
      BEGIN 
        IF reset = '1' THEN 
@@ -210,7 +210,7 @@ BEGIN
       END CASE;
       END PROCESS;
       
-    ----------Output State -------------------------------------------------   
+    ----------Output State Logic-------------------------------------------------   
       out_state: PROCESS(curState)
     BEGIN
        IF curState = init THEN 
