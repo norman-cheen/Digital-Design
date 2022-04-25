@@ -124,7 +124,7 @@ BEGIN
         nextState <= send_valid;
       
       WHEN send_valid =>
-        aNNN_valid <= '1';      -- signalling the Nibble Counter to start echoing
+        aNNN_valid <= '1';      -- signalling the Nibble Counter to send 'space' after a valid command 
         nextState <= IDLE;
 
       WHEN OTHERS => 
