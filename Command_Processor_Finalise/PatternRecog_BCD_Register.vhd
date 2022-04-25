@@ -32,13 +32,11 @@ ARCHITECTURE ANNN of commandProc IS
     END COMPONENT;
 
     TYPE state_type IS (IDLE, READ_A_a, READ_N1, READ_N2, READ_N3, done1, done2, done3,send_valid);
-    SIGNAL curState, nextState: state_type;
-    --SIGNAL aNNN_valid : std_logic;
-    
-    signal sig_rxDone, sig_rxNow, sig_ovErr, sig_framErr: std_logic;
-    signal sig_rx: std_logic; 
-    signal sig_rxData: std_logic_vector(7 downto 0);
-    signal bcd_array : BCD_ARRAY_TYPE(2 downto 0);
+    SIGNAL curState, nextState: state_type; 
+    SIGNAL sig_rxDone, sig_rxNow, sig_ovErr, sig_framErr: std_logic;
+    SIGNAL sig_rx: std_logic; 
+    SIGNAL sig_rxData: std_logic_vector(7 downto 0);
+    SIGNAL bcd_array : BCD_ARRAY_TYPE(2 downto 0);
     
 BEGIN
     
@@ -50,7 +48,7 @@ BEGIN
     CASE curState IS 
       
       WHEN IDLE =>
-        bcd_array <= ("1111", "1111", "1111");
+        bcd_array <= ("1111", "1111", "1111");  -- initialise the array
         numWords_bcd <= BCD_array;
         IF rxNow = '1' THEN
           rxDone<= '1';
@@ -126,7 +124,7 @@ BEGIN
         nextState <= send_valid;
       
       WHEN send_valid =>
-        aNNN_valid <= '1';
+        aNNN_valid <= '1';      -- signalling the Nibble Counter to start echoing
         nextState <= IDLE;
 
       WHEN OTHERS => 
@@ -142,19 +140,7 @@ BEGIN
       curState <= nextState;
     END IF;
   END PROCESS;
- 
---  rx : UART_RX_CTRL
---   port map(
---     RxD => sig_rx, -- input serial line
---     sysclk => clk,
---     reset => reset, 
---     rxDone => sig_rxdone,
---     rcvDataReg => sig_rxData,
---     dataReady => sig_rxNow,  -- valid signal
---     setOE => sig_ovErr,
---     setFE =>  sig_framerr
---   );   	
-   
+
 END;   
 
 
