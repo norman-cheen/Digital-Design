@@ -7,7 +7,7 @@ use work.common_pack.all;
 
 entity dataConsume is
 	port (
-	  clk:		in std_logic;
+	  	clk:		in std_logic;
 		reset:		in std_logic; -- synchronous reset
 		start: in std_logic; -- goes high to signal data transfer
 		numWords_bcd: in BCD_ARRAY_TYPE(2 downto 0);
